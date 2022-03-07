@@ -12,7 +12,7 @@ const Home = () => {
             <div className="container">
                <Hero>
                   <Box>
-                     <Link to="/productsAll">
+                     <Link to="/products">
                         <img src={IMGS.homepageImgIndex1} alt="" />
                         <p>tất cả sản phẩm</p>
                      </Link>

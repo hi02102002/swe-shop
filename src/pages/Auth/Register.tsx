@@ -1,12 +1,18 @@
 import Button from 'components/Button';
 import InputField from 'components/InputField';
+import Spinner from 'components/Spinner';
+import { authSelector, handleRegister } from 'features/authSlice';
 import { useFormik } from 'formik';
+import { useAppSelector } from 'hooks';
 import React from 'react';
 import * as Yup from 'yup';
 import { useAppDispatch } from '../../hooks/userAppDispatch';
-import { StyledForm, StyledHeadingSection } from './styles';
+import { AuthErrorMessage, StyledForm, StyledHeadingSection } from './styles';
 const Register = () => {
    const dispatch = useAppDispatch();
+   const {
+      register: { error, loading },
+   } = useAppSelector(authSelector);
    const form = useFormik({
       initialValues: {
          firstName: '',
@@ -16,20 +22,35 @@ const Register = () => {
          confirmPassword: '',
       },
       onSubmit: ({ email, firstName, lastName, password }) => {
-         // dispatch()
+         dispatch(
+            handleRegister({
+               email,
+               password,
+               firstName,
+               lastName,
+            })
+         );
       },
       validationSchema: Yup.object().shape({
+         firstName: Yup.string().required('You must enter this field'),
+         lastName: Yup.string().required('You must enter this field'),
          email: Yup.string()
             .email('Invalid email')
-            .required("This field can't blank"),
-         // firstName:Yup.string().
+            .required('You must enter this field'),
+         password: Yup.string()
+            .min(8, 'Password must at least 8 letter')
+            .required('You must enter this field'),
+         confirmPassword: Yup.string()
+            .oneOf([Yup.ref('password'), null], 'Password must match')
+            .required('You must enter this field'),
       }),
    });
 
    return (
       <>
          <StyledHeadingSection>Register</StyledHeadingSection>
-         <StyledForm>
+         <StyledForm onSubmit={form.handleSubmit}>
+            {error && <AuthErrorMessage>{error}</AuthErrorMessage>}
             <InputField
                label="First name*"
                placeHolder="Text"
@@ -37,6 +58,11 @@ const Register = () => {
                name="firstName"
                value={form.values.firstName}
                onChange={form.handleChange}
+               onBlur={form.handleBlur}
+               isError={Boolean(
+                  form.errors.firstName && form.touched.firstName
+               )}
+               errorText={form.errors.firstName}
             />
             <InputField
                label="Last name*"
@@ -45,6 +71,9 @@ const Register = () => {
                name="lastName"
                value={form.values.lastName}
                onChange={form.handleChange}
+               onBlur={form.handleBlur}
+               isError={Boolean(form.errors.lastName && form.touched.lastName)}
+               errorText={form.errors.lastName}
             />
             <InputField
                label="Email address*"
@@ -53,6 +82,9 @@ const Register = () => {
                name="email"
                value={form.values.email}
                onChange={form.handleChange}
+               onBlur={form.handleBlur}
+               isError={Boolean(form.errors.email && form.touched.email)}
+               errorText={form.errors.email}
             />
             <InputField
                label="Password*"
@@ -61,6 +93,9 @@ const Register = () => {
                name="password"
                value={form.values.password}
                onChange={form.handleChange}
+               onBlur={form.handleBlur}
+               isError={Boolean(form.errors.password && form.touched.password)}
+               errorText={form.errors.password}
             />
             <InputField
                label="Confirm password*"
@@ -69,11 +104,18 @@ const Register = () => {
                name="confirmPassword"
                value={form.values.confirmPassword}
                onChange={form.handleChange}
+               onBlur={form.handleBlur}
+               isError={Boolean(
+                  form.errors.confirmPassword && form.touched.confirmPassword
+               )}
+               errorText={form.errors.confirmPassword}
             />
-            <Button type="submit">Register</Button>
+            <Button type="submit" disabled={!(form.isValid && form.dirty)}>
+               {loading ? <Spinner /> : 'Register'}
+            </Button>
          </StyledForm>
       </>
    );
 };
 
-export default Register;
+export default React.memo(Register);

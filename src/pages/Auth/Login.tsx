@@ -34,7 +34,9 @@ const Login = () => {
          );
       },
       validationSchema: Yup.object().shape({
-         email: Yup.string().email('Invalid email').required(),
+         email: Yup.string()
+            .email('Invalid email')
+            .required('You must enter this field'),
       }),
    });
 
@@ -63,7 +65,9 @@ const Login = () => {
                onBlur={form.handleBlur}
                value={form.values.password}
             />
-            <Button type="submit">{loading ? <Spinner /> : 'Login'}</Button>
+            <Button type="submit" disabled={!(form.isValid && form.dirty)}>
+               {loading ? <Spinner /> : 'Login'}
+            </Button>
          </StyledForm>
       </>
    );

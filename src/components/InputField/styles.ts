@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const StyledInputField = styled.div<{
    isFocus?: boolean;
@@ -22,21 +22,12 @@ export const StyledInputField = styled.div<{
       width: 100%;
       transition: all 0.3s ease;
       color: var(--swe-grey-3);
-      border: 1px solid var(--swe-grey);
+      border: 2px solid var(--swe-grey);
+      border-color: ${(p) => (p.isError ? 'red' : undefined)};
 
-      ${(p) =>
-         p.isError
-            ? css`
-                 border-color: blue;
-              `
-            : undefined}
-
-      ${(p) =>
-         p.isFocus
-            ? css`
-                 border-color: var(--swe-black);
-              `
-            : undefined}
+      &:focus {
+         border-color: ${(p) => (p.isError ? 'red' : 'var(--swe-black)')};
+      }
    }
 
    p {

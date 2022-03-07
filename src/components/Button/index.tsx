@@ -5,11 +5,23 @@ interface Props {
    onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
    type?: 'button' | 'submit' | 'reset';
    className?: string;
+   disabled?: boolean;
 }
 
-const Button: React.FC<Props> = ({ onClick, children, type, className }) => {
+const Button: React.FC<Props> = ({
+   onClick,
+   children,
+   type,
+   className,
+   disabled,
+}) => {
    return (
-      <StyledButton onClick={onClick} type={type} className={className}>
+      <StyledButton
+         disabled={disabled}
+         onClick={onClick}
+         type={type}
+         className={className}
+      >
          {children}
       </StyledButton>
    );

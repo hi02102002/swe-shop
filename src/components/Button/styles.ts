@@ -19,4 +19,11 @@ export const StyledButton = styled.button`
       border-color: #505152;
       color: #ffffff;
    }
+
+   &:disabled {
+      pointer-events: none;
+      border-color: #505152;
+      color: #ffffff;
+      background: #505152;
+   }
 `;

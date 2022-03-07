@@ -22,7 +22,7 @@ export const Path = styled.div`
       }
    }
 
-   & > *::after {
+   & > *:not(:last-child)::after {
       content: '/';
       margin: 0 0.4rem;
    }

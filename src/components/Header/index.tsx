@@ -1,10 +1,13 @@
 import Box from 'components/Box';
+import { authSelector } from 'features/authSlice';
+import { useAppSelector } from 'hooks';
 import { IMGS } from 'images';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderContainer, StyledHeader } from './styles';
 
 const Header = () => {
+   const { accessToken } = useAppSelector(authSelector);
    return (
       <StyledHeader>
          <div className="container">
@@ -13,7 +16,9 @@ const Header = () => {
                   <img src={IMGS.logo} alt="" />
                </Link>
                <Box>
-                  <Link to="/my-account">My account</Link>
+                  <Link to={accessToken ? '/my-account' : '/auth'}>
+                     My account
+                  </Link>
                   <div>Search</div>
                   <div>Cart</div>
                </Box>

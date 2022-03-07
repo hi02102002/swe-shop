@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { request } from 'api/axiosClient';
+import { sweApi } from 'api/sweApi';
+import { ProductItem } from 'shared/types';
 import { RootState } from './../store';
 
 export const getAllProducts = createAsyncThunk(
    'products/getAllProducts',
    async () => {
-      const { data } = await request.get('products');
+      const { data } = await sweApi.getAllProducts();
       return data;
    }
 );
@@ -13,21 +14,11 @@ export const getAllProducts = createAsyncThunk(
 const initialState: {
    loading: boolean;
    error: string | null | undefined;
-   products: any;
-   filters: {
-      sizes: string[];
-      types: string[];
-      colors: string[];
-   };
+   products: ProductItem[];
 } = {
    loading: false,
    error: null,
    products: [],
-   filters: {
-      sizes: [],
-      colors: [],
-      types: [],
-   },
 };
 
 const productsSlice = createSlice({

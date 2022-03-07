@@ -1,7 +1,6 @@
+import Loader from 'components/Loader';
 import Auth from 'pages/Auth';
-import Home from 'pages/Home';
-import Products from 'pages/Products';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // products.forEach((item) => {
@@ -16,12 +15,29 @@ import { Route, Routes } from 'react-router-dom';
 //    addItem(item);
 // });
 
+const Home = React.lazy(() => import('pages/Home')); // Lazy-loaded
+const Products = React.lazy(() => import('pages/Products')); // Lazy-loaded
+
 const App = () => {
    return (
       <>
          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/productsAll" element={<Products />} />
+            <Route
+               path="/"
+               element={
+                  <Suspense fallback={<Loader />}>
+                     <Home />
+                  </Suspense>
+               }
+            />
+            <Route
+               path="/products"
+               element={
+                  <Suspense fallback={<Loader />}>
+                     <Products />
+                  </Suspense>
+               }
+            />
             <Route path="/auth" element={<Auth />} />
          </Routes>
       </>

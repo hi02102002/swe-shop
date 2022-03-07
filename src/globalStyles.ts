@@ -23,6 +23,8 @@ export const GlobalStyle = createGlobalStyle`
     --swe-heading-font-size-h5: 24px;
     --swe-heading-font-size-h6: 16px;
     --swe-heading-font-weight: 600;
+    --swe-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --swe-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   }
 
   *,*::after,*::before{
@@ -34,6 +36,7 @@ export const GlobalStyle = createGlobalStyle`
       font-size:62.5%;
       box-sizing:border-box;
       -webkit-text-size-adjust:100%;
+      -webkit-tap-highlight-color:transparent;
       font-family:'Francois One','Roboto', sans-serif ;
       
   }
@@ -67,6 +70,7 @@ export const GlobalStyle = createGlobalStyle`
   input,button{
       font-family:inherit;
       font-size:inherit;
+      outline:0;
   }
 
 

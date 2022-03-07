@@ -30,8 +30,6 @@ const InputField: React.FC<Props> = ({
 }) => {
    const [isFocus, setIsFocus] = useState<boolean>(false);
 
-   console.log(isError);
-
    const handleFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
       setIsFocus(true);
       onFocus && onFocus(e);
@@ -41,7 +39,7 @@ const InputField: React.FC<Props> = ({
       onBlur && onBlur(e);
    };
    return (
-      <StyledInputField isFocus={isFocus}>
+      <StyledInputField isFocus={isFocus} isError={isError}>
          {label && <label>{label}</label>}
          <input
             type={type}
