@@ -8,7 +8,7 @@ import { StyledProducts } from './styles';
 
 const Products = () => {
    const dispatch = useAppDispatch();
-   const { products, loading, error } = useAppSelector(productsSelector);
+   const { products } = useAppSelector(productsSelector);
 
    useEffect(() => {
       dispatch(getAllProducts());
