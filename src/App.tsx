@@ -1,5 +1,4 @@
 import Loader from 'components/Loader';
-import Auth from 'pages/Auth';
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -17,6 +16,7 @@ import { Route, Routes } from 'react-router-dom';
 
 const Home = React.lazy(() => import('pages/Home')); // Lazy-loaded
 const Products = React.lazy(() => import('pages/Products')); // Lazy-loaded
+const Auth = React.lazy(() => import('pages/Auth')); // Lazy-loaded
 
 const App = () => {
    return (
@@ -38,7 +38,14 @@ const App = () => {
                   </Suspense>
                }
             />
-            <Route path="/auth" element={<Auth />} />
+            <Route
+               path="/auth"
+               element={
+                  <Suspense fallback={<Loader />}>
+                     <Auth />
+                  </Suspense>
+               }
+            />
          </Routes>
       </>
    );

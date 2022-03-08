@@ -1,7 +1,25 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+@keyframes modalZoomIn {
+    from {
+        opacity:0;
+        transform:scale(0);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+  }
 
+  @keyframes fadeIn {
+      from{
+          opacity:0;
+      }
+      to{
+          opacity:1;
+      }
+  }
   :root{
       --height-header:6rem;
       --swe-white:#fff;
@@ -46,8 +64,7 @@ export const GlobalStyle = createGlobalStyle`
       background-color:var(--swe-white);
       font-size:var(--swe-base-font-size);
       color:var(--swe-text-color);
-      line-height:1.25;
-    
+      line-height:1.5;
   }
 
   img{
@@ -103,5 +120,8 @@ export const GlobalStyle = createGlobalStyle`
   h6{
       font-size:var(--swe-heading-font-size-h6);
   }
+
+
+  
 
 `;

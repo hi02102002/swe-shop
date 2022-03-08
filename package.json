@@ -23,9 +23,9 @@
       "react-scripts": "5.0.0",
       "redux-persist": "^6.0.0",
       "styled-components": "^5.3.3",
+      "swiper": "6.8.4",
       "typescript": "^4.4.2",
       "uuid": "^8.3.2",
-      "uuidv4": "^6.2.12",
       "web-vitals": "^2.1.0",
       "yup": "^0.32.11"
    },
@@ -57,6 +57,7 @@
       "styled-components": "^5"
    },
    "devDependencies": {
-      "@types/styled-components": "^5.1.23"
+      "@types/styled-components": "^5.1.23",
+      "@types/uuid": "^8.3.4"
    }
 }

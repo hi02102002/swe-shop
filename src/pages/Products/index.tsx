@@ -1,16 +1,24 @@
 import Hero from 'components/Hero';
 import Layout from 'components/Layout';
-import React from 'react';
-import ListProducts from './components/ListProducts';
+import ListProducts from 'components/ListProducts';
+import { getAllProducts, productsSelector } from 'features/productsSlice';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import React, { useEffect } from 'react';
 import { StyledProducts } from './styles';
 
 const Products = () => {
+   const dispatch = useAppDispatch();
+   const { products, loading, error } = useAppSelector(productsSelector);
+
+   useEffect(() => {
+      dispatch(getAllProducts());
+   }, [dispatch]);
    return (
       <Layout>
          <StyledProducts>
             <Hero content="Products" />
             <div className="container">
-               <ListProducts />
+               <ListProducts products={products} type="product" />
             </div>
          </StyledProducts>
       </Layout>

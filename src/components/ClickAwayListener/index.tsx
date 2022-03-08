@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 
 const ClickAwayListener: React.FC<{
    onClickAway: () => any;
-}> = ({ onClickAway, children }) => {
+   className?: string;
+}> = ({ onClickAway, className, children }) => {
    const rootRef = useRef<HTMLDivElement | null>(null);
 
    useEffect(() => {
@@ -17,7 +18,11 @@ const ClickAwayListener: React.FC<{
       };
    }, [onClickAway]);
 
-   return <div>{children}</div>;
+   return (
+      <div ref={rootRef} className={className || ''}>
+         {children}
+      </div>
+   );
 };
 
 export default ClickAwayListener;

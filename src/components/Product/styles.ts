@@ -1,4 +1,22 @@
+import IconButton from 'components/IconButton';
 import styled from 'styled-components';
+
+export const StyledButtonQuickView = styled(IconButton)`
+   width: 4rem;
+   height: 4rem;
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%) translateY(150%);
+   bottom: 1.6rem;
+   z-index: 3;
+
+   .tool-tip {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 1rem);
+   }
+`;
 
 export const StyledProduct = styled.div`
    row-gap: 1.2rem;
@@ -8,6 +26,14 @@ export const StyledProduct = styled.div`
    flex-direction: column;
 
    position: relative;
+
+   .box {
+      overflow: hidden;
+   }
+
+   .box:hover ${StyledButtonQuickView} {
+      transform: translateX(-50%) translateY(0);
+   }
 `;
 
 export const StyledImg = styled.div`
@@ -61,63 +87,9 @@ export const StyledPrice = styled.span`
    text-align: center;
 `;
 
-export const StyledAddWishlist = styled.button`
+export const StyledButtonWishlist = styled(IconButton)`
    position: absolute;
    right: 1.6rem;
    top: 1.6rem;
    z-index: 3;
-
-   width: 3.6rem;
-   height: 3.6rem;
-
-   display: flex;
-   justify-content: center;
-   align-items: center;
-
-   border-radius: 50%;
-   border: 0;
-   box-shadow: var(--swe-shadow);
-
-   cursor: pointer;
-
-   background-color: var(--swe-white);
-   outline: 0;
-
-   transition: all 0.3s ease;
-
-   .tool-tip {
-      position: absolute;
-      right: calc(100% + 1rem);
-
-      width: max-content;
-      padding: 0.5rem 1rem;
-
-      background-color: var(--swe-white);
-
-      box-shadow: var(--swe-shadow);
-      border-radius: 6px;
-
-      opacity: 0;
-      visibility: hidden;
-
-      transition: all 0.3s ease;
-   }
-
-   svg {
-      width: 2rem;
-      height: 2rem;
-      transition: all 0.3s ease;
-   }
-
-   &:hover {
-      background-color: var(--swe-black);
-
-      svg {
-         color: var(--swe-white);
-      }
-      .tool-tip {
-         opacity: 1;
-         visibility: visible;
-      }
-   }
 `;
