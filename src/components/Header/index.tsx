@@ -1,13 +1,15 @@
 import Box from 'components/Box';
+import Cart from 'components/Cart';
 import { authSelector } from 'features/authSlice';
 import { useAppSelector } from 'hooks';
 import { IMGS } from 'images';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderContainer, StyledHeader } from './styles';
 
 const Header = () => {
    const { accessToken } = useAppSelector(authSelector);
+   const [showCart, setShowCart] = useState<boolean>(false);
    return (
       <StyledHeader>
          <div className="container">
@@ -20,7 +22,22 @@ const Header = () => {
                      My account
                   </Link>
                   <div>Search</div>
-                  <div>Cart</div>
+                  <Box>
+                     <div
+                        onClick={() => {
+                           setShowCart(true);
+                        }}
+                     >
+                        Cart
+                     </div>
+                     {showCart && (
+                        <Cart
+                           onClose={() => {
+                              setShowCart(false);
+                           }}
+                        />
+                     )}
+                  </Box>
                </Box>
             </HeaderContainer>
          </div>
@@ -28,4 +45,4 @@ const Header = () => {
    );
 };
 
-export default Header;
+export default React.memo(Header);

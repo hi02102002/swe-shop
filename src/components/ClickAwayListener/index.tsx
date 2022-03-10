@@ -19,7 +19,7 @@ const ClickAwayListener: React.FC<{
    }, [onClickAway]);
 
    return (
-      <div ref={rootRef} className={className || ''}>
+      <div ref={rootRef} className={className}>
          {children}
       </div>
    );

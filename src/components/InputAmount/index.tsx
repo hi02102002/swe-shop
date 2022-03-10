@@ -6,18 +6,25 @@ interface Props {
    amount: number;
    setAmount: any;
    className?: string;
+   onRemove?: () => any;
 }
 
-const InputAmount: React.FC<Props> = ({ amount, setAmount, className }) => {
+const InputAmount: React.FC<Props> = ({
+   amount,
+   setAmount,
+   className,
+   onRemove,
+}) => {
    const inputRef = useRef<HTMLInputElement | null>(null);
    return (
-      <StyledInputAmount className={className || ''}>
-         <h6>Quantity: </h6>
+      <StyledInputAmount className={className || ''} onBlur={() => {}}>
          <Box>
             <button
-               onClick={() => {
+               onClick={(e) => {
+                  e.stopPropagation();
                   setAmount((amount: number) => {
                      if (amount <= 1) {
+                        onRemove && onRemove();
                         return 1;
                      }
                      return amount - 1;
@@ -35,14 +42,16 @@ const InputAmount: React.FC<Props> = ({ amount, setAmount, className }) => {
                   setAmount(+value);
                }}
                onBlur={(e) => {
-                  console.log(e.target.value);
+                  e.stopPropagation();
                   if (e.target.value === '0' && inputRef.current) {
                      inputRef.current.value = '1';
+                     setAmount(1);
                   }
                }}
             />
             <button
-               onClick={() => {
+               onClick={(e) => {
+                  e.stopPropagation();
                   setAmount(amount + 1);
                }}
             >

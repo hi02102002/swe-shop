@@ -1,6 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authSlice from 'features/authSlice';
+import cartSlice from 'features/cartSlice';
 import productsSlice from 'features/productsSlice';
+import { middleware } from 'middleware';
 import {
    FLUSH,
    PAUSE,
@@ -16,7 +18,7 @@ import storage from 'redux-persist/lib/storage';
 const rootPersistConfig = {
    key: 'root',
    storage,
-   blacklist: ['auth', 'products'],
+   blacklist: ['auth', 'products', 'carts'],
 };
 
 const authPersistConfig = {
@@ -25,9 +27,16 @@ const authPersistConfig = {
    blacklist: ['login', 'register'],
 };
 
+const cartsPersistConfig = {
+   key: 'carts',
+   storage: storage,
+   blacklist: ['totalPrice', 'loading', 'error'],
+};
+
 const rootReducer = combineReducers({
    auth: persistReducer(authPersistConfig, authSlice),
    products: productsSlice,
+   carts: persistReducer(cartsPersistConfig, cartSlice),
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
@@ -40,7 +49,7 @@ export const store = configureStore({
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
          },
          immutableCheck: false,
-      }),
+      }).concat(middleware),
 });
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;

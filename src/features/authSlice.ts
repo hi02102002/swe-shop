@@ -73,6 +73,7 @@ export const handleRegister = createAsyncThunk<
          avatar: user.photoURL,
          id: user.uid,
          email: user.email,
+         userId: user.uid,
       });
 
       const accessToken = (await getIdTokenResult(user)).token;
@@ -150,7 +151,7 @@ const authSlice = createSlice({
          .addCase(handleRegister.fulfilled, (state, action) => {
             state.currentUser = action.payload.user;
             state.accessToken = action.payload.accessToken;
-            state.register.loading = true;
+            state.register.loading = false;
          })
          .addCase(handleRegister.rejected, (state, action) => {
             state.register.error = action.error.code;

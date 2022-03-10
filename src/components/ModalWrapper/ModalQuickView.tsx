@@ -1,6 +1,10 @@
+import Box from 'components/Box';
 import Button from 'components/Button';
 import InputAmount from 'components/InputAmount';
 import Sizes from 'components/Sizes';
+import { authSelector } from 'features/authSlice';
+import { addToCart } from 'features/cartSlice';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProductItem } from 'shared/types';
@@ -21,7 +25,30 @@ interface Props {
 const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
    const [choseSize, setChoseSize] = useState<string>(product.size[0]);
    const [amount, setAmount] = useState<number>(1);
+   const { currentUser, accessToken } = useAppSelector(authSelector);
+   const dispatch = useAppDispatch();
    const navigate = useNavigate();
+
+   const handleAddToCart = () => {
+      if (!accessToken) {
+         onClose();
+         navigate('/auth');
+         return;
+      }
+      dispatch(
+         addToCart({
+            amount: amount,
+            color: product.color,
+            id: product.id,
+            img: product.imgs[0],
+            name: product.name,
+            price: product.price,
+            size: choseSize,
+            userId: currentUser?.uid as string,
+            productId: product.productId,
+         })
+      );
+   };
 
    return (
       <ModalWrapper>
@@ -45,9 +72,18 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
                      choseSize={choseSize}
                      setChoseSize={setChoseSize}
                   />
-                  <InputAmount amount={amount} setAmount={setAmount} />
+                  <Box
+                     sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        columnGap: '1.2rem',
+                     }}
+                  >
+                     <h6>Quantity: </h6>
+                     <InputAmount amount={amount} setAmount={setAmount} />
+                  </Box>
                   <div className="button-group">
-                     <Button>Add to cart</Button>
+                     <Button onClick={handleAddToCart}>Add to cart</Button>
                      <Button
                         onClick={() => {
                            navigate(`${product.id}`);

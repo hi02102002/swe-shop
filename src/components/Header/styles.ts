@@ -19,13 +19,22 @@ export const HeaderContainer = styled(Box)`
       }
    }
 
-   .box {
+   & > .box {
       display: flex;
       align-items: center;
       column-gap: 2rem;
-   }
 
-   .box > * {
-      cursor: pointer;
+      & > * {
+         cursor: pointer;
+      }
+
+      & > .box {
+         position: relative;
+         cursor: unset;
+
+         & > div:first-child {
+            cursor: pointer;
+         }
+      }
    }
 `;

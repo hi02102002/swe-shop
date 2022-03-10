@@ -2,14 +2,17 @@ import Button from 'components/Button';
 import InputField from 'components/InputField';
 import Spinner from 'components/Spinner';
 import { authSelector, handleRegister } from 'features/authSlice';
+import { getAllCarts } from 'features/cartSlice';
 import { useFormik } from 'formik';
 import { useAppSelector } from 'hooks';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useAppDispatch } from '../../hooks/userAppDispatch';
 import { AuthErrorMessage, StyledForm, StyledHeadingSection } from './styles';
 const Register = () => {
    const dispatch = useAppDispatch();
+   const navigate = useNavigate();
    const {
       register: { error, loading },
    } = useAppSelector(authSelector);
@@ -21,15 +24,21 @@ const Register = () => {
          password: '',
          confirmPassword: '',
       },
-      onSubmit: ({ email, firstName, lastName, password }) => {
-         dispatch(
+      onSubmit: async ({ email, firstName, lastName, password }) => {
+         const resultAction = await dispatch(
             handleRegister({
                email,
                password,
                firstName,
                lastName,
+               callback: () => {
+                  navigate('/');
+               },
             })
          );
+         if (handleRegister.fulfilled.match(resultAction)) {
+            dispatch(getAllCarts(resultAction.payload.user.uid));
+         }
       },
       validationSchema: Yup.object().shape({
          firstName: Yup.string().required('You must enter this field'),

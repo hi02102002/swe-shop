@@ -7,4 +7,17 @@ export interface ProductItem {
    imgs: string[];
    desc: string;
    id: string;
+   productId: string;
+}
+
+export interface CartItem {
+   name: string;
+   price: number;
+   amount: number;
+   size: string;
+   color: string;
+   id: string;
+   img: string;
+   userId: string;
+   productId: string;
 }

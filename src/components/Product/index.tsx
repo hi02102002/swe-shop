@@ -1,7 +1,5 @@
 import Box from 'components/Box';
-import Button from 'components/Button';
 import ModalQuickView from 'components/ModalWrapper/ModalQuickView';
-import { useOverFlowHiddenBody } from 'hooks';
 import React, { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
@@ -24,8 +22,6 @@ interface Props {
 const Product: React.FC<Props> = ({ product, type }) => {
    const [activeModalQuickView, setActiveModalQuickView] =
       useState<boolean>(false);
-
-   useOverFlowHiddenBody(activeModalQuickView);
 
    return (
       <>
@@ -69,10 +65,9 @@ const Product: React.FC<Props> = ({ product, type }) => {
                </StyledImg>
             </Box>
             <StyledName>
-               <Link to={`/products/${product.id}`}>{product.name}</Link>
+               <Link to={`/products/${product.productId}`}>{product.name}</Link>
             </StyledName>
             <StyledPrice>${product.price}.00</StyledPrice>
-            {type === 'product' && <Button>Add to cart</Button>}
          </StyledProduct>
          {activeModalQuickView && (
             <ModalQuickView

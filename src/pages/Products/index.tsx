@@ -13,6 +13,11 @@ const Products = () => {
    useEffect(() => {
       dispatch(getAllProducts());
    }, [dispatch]);
+
+   useEffect(() => {
+      document.title = 'SWE - PRODUCTS';
+   }, []);
+
    return (
       <Layout>
          <StyledProducts>

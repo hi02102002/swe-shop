@@ -11,7 +11,7 @@ const ListProducts: React.FC<{
       <StyledListProducts>
          {products.map((product) => {
             return (
-               <li key={product.id}>
+               <li key={product.productId}>
                   <Product product={product} type={type} />
                </li>
             );

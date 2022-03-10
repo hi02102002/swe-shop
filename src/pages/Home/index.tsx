@@ -1,11 +1,15 @@
 import Box from 'components/Box';
 import Layout from 'components/Layout';
 import { IMGS } from 'images';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Hero, StyledHome } from './styles';
 
 const Home = () => {
+   useEffect(() => {
+      document.title = 'SWE';
+   }, []);
+
    return (
       <Layout>
          <StyledHome>

@@ -2,6 +2,7 @@ import Button from 'components/Button';
 import InputField from 'components/InputField';
 import Spinner from 'components/Spinner';
 import { authSelector, handleLogin } from 'features/authSlice';
+import { getAllCarts } from 'features/cartSlice';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import React from 'react';
@@ -19,8 +20,8 @@ const Login = () => {
          email: '',
          password: '',
       },
-      onSubmit: ({ email, password }, actions) => {
-         dispatch(
+      onSubmit: async ({ email, password }, actions) => {
+         const resultAction = await dispatch(
             handleLogin({
                email,
                password,
@@ -32,6 +33,9 @@ const Login = () => {
                },
             })
          );
+         if (handleLogin.fulfilled.match(resultAction)) {
+            dispatch(getAllCarts(resultAction.payload.user.uid));
+         }
       },
       validationSchema: Yup.object().shape({
          email: Yup.string()
