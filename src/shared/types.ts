@@ -21,3 +21,9 @@ export interface CartItem {
    userId: string;
    productId: string;
 }
+
+export interface ToastItem {
+   id: string;
+   content: string;
+   type: 'SUCCESS' | 'ERROR' | 'WARN';
+}

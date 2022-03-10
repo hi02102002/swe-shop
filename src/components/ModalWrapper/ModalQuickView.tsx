@@ -4,10 +4,13 @@ import InputAmount from 'components/InputAmount';
 import Sizes from 'components/Sizes';
 import { authSelector } from 'features/authSlice';
 import { addToCart } from 'features/cartSlice';
+import { addToastItem } from 'features/toastSlide';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import React, { useState } from 'react';
+import { IoCloseOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { ProductItem } from 'shared/types';
+import { v4 as uuid } from 'uuid';
 import ModalWrapper from './ModalWrapper';
 import {
    StyledBody,
@@ -16,7 +19,6 @@ import {
    StyledHeader,
    StyledModalQuickView,
 } from './style';
-
 interface Props {
    onClose: () => any;
    product: ProductItem;
@@ -48,13 +50,23 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
             productId: product.productId,
          })
       );
+      dispatch(
+         addToastItem({
+            id: uuid(),
+            content: 'You add product to cart successful!',
+            type: 'SUCCESS',
+         })
+      );
    };
 
    return (
       <ModalWrapper>
-         <StyledModalQuickView onClickAway={onClose}>
+         <StyledModalQuickView>
             <StyledHeader>
                <h5>Product Information</h5>
+               <button onClick={onClose}>
+                  <IoCloseOutline />
+               </button>
             </StyledHeader>
             <StyledBody>
                <StyledGallery>

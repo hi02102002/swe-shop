@@ -19,9 +19,13 @@ const Cart: React.FC<{
    return (
       <StyledCart onClickAway={onClose}>
          <CartList>
-            {carts.map((cart) => (
-               <CartItem key={`${cart.id} ${cart.size}`} cart={cart} />
-            ))}
+            {carts.length > 0 ? (
+               carts.map((cart) => (
+                  <CartItem key={`${cart.id} ${cart.size}`} cart={cart} />
+               ))
+            ) : (
+               <p className="alter">No products in the cart.</p>
+            )}
          </CartList>
          <CartBottom>
             <Total>
@@ -33,10 +37,11 @@ const Cart: React.FC<{
                   onClick={() => {
                      dispatch(removeAllCartItem());
                   }}
+                  disabled={carts.length === 0}
                >
                   Remove All
                </Button>
-               <Button>Check out</Button>
+               <Button disabled={carts.length === 0}>Check out</Button>
             </div>
          </CartBottom>
       </StyledCart>

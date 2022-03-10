@@ -1,4 +1,5 @@
 import Loader from 'components/Loader';
+import Toast from 'components/Toast';
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ const Auth = React.lazy(() => import('pages/Auth')); // Lazy-loaded
 const App = () => {
    return (
       <>
+         <Toast bottom="1.5rem" left="1.5rem" />
          <Routes>
             <Route
                path="/"

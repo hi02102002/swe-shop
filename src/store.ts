@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authSlice from 'features/authSlice';
 import cartSlice from 'features/cartSlice';
 import productsSlice from 'features/productsSlice';
+import toastSlide from 'features/toastSlide';
 import { middleware } from 'middleware';
 import {
    FLUSH,
@@ -18,7 +19,7 @@ import storage from 'redux-persist/lib/storage';
 const rootPersistConfig = {
    key: 'root',
    storage,
-   blacklist: ['auth', 'products', 'carts'],
+   blacklist: ['auth', 'products', 'carts', 'toast'],
 };
 
 const authPersistConfig = {
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
    auth: persistReducer(authPersistConfig, authSlice),
    products: productsSlice,
    carts: persistReducer(cartsPersistConfig, cartSlice),
+   toast: toastSlide,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

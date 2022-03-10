@@ -14,6 +14,10 @@ export const StyledCart = styled(ClickAwayListener)`
    box-shadow: var(--swe-shadow);
    animation: fadeInUp 0.3s ease;
    overflow: hidden;
+
+   .alter {
+      text-align: center;
+   }
 `;
 
 export const CartList = styled.ul`

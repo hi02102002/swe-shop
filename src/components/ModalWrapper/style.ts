@@ -1,4 +1,3 @@
-import ClickAwayListener from 'components/ClickAwayListener';
 import styled from 'styled-components';
 
 export const StyledModalWrapper = styled.div`
@@ -15,7 +14,7 @@ export const StyledModalWrapper = styled.div`
    z-index: 1000;
 `;
 
-export const StyledModalQuickView = styled(ClickAwayListener)`
+export const StyledModalQuickView = styled.div`
    width: 100%;
    background-color: var(--swe-white);
    max-width: 90rem;
@@ -29,6 +28,29 @@ export const StyledHeader = styled.div`
    padding: 1rem;
    color: var(--swe-white);
    text-align: center;
+   position: relative;
+
+   button {
+      cursor: pointer;
+      border: 0;
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 50%;
+      background-color: var(--swe-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+
+      svg {
+         width: 2.4rem;
+         height: 2.4rem;
+         color: var(--swe-black);
+      }
+   }
 `;
 
 export const StyledBody = styled.div`
