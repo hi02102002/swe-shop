@@ -4,13 +4,14 @@ import { Path, StyledHero } from './styles';
 
 const Hero: React.FC<{
    content: string;
-}> = ({ content }) => {
+   path: string;
+}> = ({ content, path }) => {
    return (
       <StyledHero>
          <div className="container">
             <Path>
                <Link to={'/'}>Home</Link>
-               <span>{window.location.pathname.replace('/', '')}</span>
+               <span>{path}</span>
             </Path>
             <div className="text">
                <h3>{content}</h3>

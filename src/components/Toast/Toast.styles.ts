@@ -31,8 +31,10 @@ export const ToastItem = styled.div<{
    border-radius: 6px;
    color: var(--swe-white);
    max-width: 30rem;
+   min-width: 30rem;
    display: flex;
    align-items: center;
+   justify-content: space-between;
    column-gap: 1.2rem;
    box-shadow: var(--swe-shadow);
 

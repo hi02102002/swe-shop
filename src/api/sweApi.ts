@@ -6,6 +6,9 @@ export const sweApi = {
          params,
       });
    },
+   getProduct: (id: string) => {
+      return request.get<ProductItem>(`products/${id}`);
+   },
    getAllCarts: (userId: string) => {
       return request.get<CartItem[]>('carts', {
          params: {

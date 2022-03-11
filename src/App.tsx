@@ -18,6 +18,7 @@ import { Route, Routes } from 'react-router-dom';
 const Home = React.lazy(() => import('pages/Home')); // Lazy-loaded
 const Products = React.lazy(() => import('pages/Products')); // Lazy-loaded
 const Auth = React.lazy(() => import('pages/Auth')); // Lazy-loaded
+const DetailProduct = React.lazy(() => import('pages/DetailProduct')); // Lazy-loaded
 
 const App = () => {
    return (
@@ -33,6 +34,14 @@ const App = () => {
                }
             />
             <Route
+               path="/auth"
+               element={
+                  <Suspense fallback={<Loader />}>
+                     <Auth />
+                  </Suspense>
+               }
+            />
+            <Route
                path="/products"
                element={
                   <Suspense fallback={<Loader />}>
@@ -40,11 +49,12 @@ const App = () => {
                   </Suspense>
                }
             />
+
             <Route
-               path="/auth"
+               path="/products/:productId"
                element={
                   <Suspense fallback={<Loader />}>
-                     <Auth />
+                     <DetailProduct />
                   </Suspense>
                }
             />

@@ -11,7 +11,7 @@ const Sizes: React.FC<Props> = ({ sizes, choseSize, setChoseSize }) => {
    return (
       <StyledSizes>
          <h6>Sizes: </h6>
-         {sizes.map((size) => (
+         {sizes?.map((size) => (
             <div
                className={`size ${choseSize === size ? 'active' : ''}`}
                key={size}

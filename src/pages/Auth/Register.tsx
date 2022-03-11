@@ -3,10 +3,12 @@ import InputField from 'components/InputField';
 import Spinner from 'components/Spinner';
 import { authSelector, handleRegister } from 'features/authSlice';
 import { getAllCarts } from 'features/cartSlice';
+import { addToastItem } from 'features/toastSlide';
 import { useFormik } from 'formik';
 import { useAppSelector } from 'hooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { v4 } from 'uuid';
 import * as Yup from 'yup';
 import { useAppDispatch } from '../../hooks/userAppDispatch';
 import { AuthErrorMessage, StyledForm, StyledHeadingSection } from './styles';
@@ -31,13 +33,29 @@ const Register = () => {
                password,
                firstName,
                lastName,
-               callback: () => {
-                  navigate('/');
-               },
             })
          );
          if (handleRegister.fulfilled.match(resultAction)) {
+            dispatch(
+               addToastItem({
+                  id: v4(),
+                  content: 'Register successful',
+                  type: 'SUCCESS',
+               })
+            );
+            form.resetForm();
+            navigate(-1);
             dispatch(getAllCarts(resultAction.payload.user.uid));
+         }
+
+         if (handleRegister.rejected.match(resultAction)) {
+            dispatch(
+               addToastItem({
+                  id: v4(),
+                  content: 'Register error',
+                  type: 'ERROR',
+               })
+            );
          }
       },
       validationSchema: Yup.object().shape({

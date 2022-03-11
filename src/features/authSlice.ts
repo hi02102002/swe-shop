@@ -15,15 +15,13 @@ export const handleLogin = createAsyncThunk<
       user: UserInfo;
       accessToken: string;
    },
-   { email: string; password: string; callback?: () => any }
->('auth/login', async ({ email, password, callback }) => {
+   { email: string; password: string }
+>('auth/login', async ({ email, password }, thunkApi) => {
    const { user } = await signInWithEmailAndPassword(
       firebaseAuth,
       email,
       password
    );
-
-   callback && callback();
 
    const accessToken = (await getIdTokenResult(user)).token;
 

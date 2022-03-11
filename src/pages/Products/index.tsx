@@ -21,7 +21,7 @@ const Products = () => {
    return (
       <Layout>
          <StyledProducts>
-            <Hero content="Products" />
+            <Hero content="Products" path="Products" />
             <div className="container">
                <ListProducts products={products} type="product" />
             </div>

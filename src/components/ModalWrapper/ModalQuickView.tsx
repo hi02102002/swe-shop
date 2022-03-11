@@ -34,6 +34,13 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
    const handleAddToCart = () => {
       if (!accessToken) {
          onClose();
+         dispatch(
+            addToastItem({
+               id: uuid(),
+               content: 'You must login before add product to cart!',
+               type: 'ERROR',
+            })
+         );
          navigate('/auth');
          return;
       }

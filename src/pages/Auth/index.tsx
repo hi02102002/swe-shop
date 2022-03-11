@@ -13,7 +13,7 @@ const Auth = () => {
 
    return (
       <Layout>
-         <Hero content="Login - Register" />
+         <Hero content="Login - Register" path="Login - Register" />
          <div className="container">
             <StyledAuth>
                <StyledWrap>

@@ -37,4 +37,19 @@ export const HeaderContainer = styled(Box)`
          }
       }
    }
+
+   .total-amount-cart {
+      position: absolute;
+      font-size: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--swe-orange);
+      border-radius: 50%;
+      color: var(--swe-white);
+      top: -1rem;
+      right: -1rem;
+   }
 `;

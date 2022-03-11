@@ -65,7 +65,7 @@ const Product: React.FC<Props> = ({ product, type }) => {
                </StyledImg>
             </Box>
             <StyledName>
-               <Link to={`/products/${product.productId}`}>{product.name}</Link>
+               <Link to={`/products/${product.id}`}>{product.name}</Link>
             </StyledName>
             <StyledPrice>${product.price}.00</StyledPrice>
          </StyledProduct>
