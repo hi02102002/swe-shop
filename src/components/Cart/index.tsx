@@ -1,14 +1,23 @@
 import Button from 'components/Button';
-import { cartsSelector, removeAllCartItem } from 'features/cartSlice';
+import Spinner from 'components/Spinner';
+import { cartAction } from 'features/cart';
+import { cartsSelector } from 'features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from 'hooks';
+import _ from 'lodash';
 import React, { useMemo } from 'react';
-import { CartBottom, CartList, StyledCart, Total } from './Cart.styles';
+import {
+   CartBottom,
+   CartList,
+   Loading,
+   StyledCart,
+   Total,
+} from './Cart.styles';
 import CartItem from './CartItem';
 
 const Cart: React.FC<{
    onClose: () => any;
 }> = ({ onClose }) => {
-   const { carts } = useAppSelector(cartsSelector);
+   const { carts, remove } = useAppSelector(cartsSelector);
    const dispatch = useAppDispatch();
    const total = useMemo(() => {
       return carts.reduce((perviousValue, currentValue) => {
@@ -18,6 +27,11 @@ const Cart: React.FC<{
 
    return (
       <StyledCart onClickAway={onClose}>
+         {remove.loading && (
+            <Loading>
+               <Spinner />
+            </Loading>
+         )}
          <CartList>
             {carts.length > 0 ? (
                carts.map((cart) => (
@@ -35,7 +49,7 @@ const Cart: React.FC<{
             <div className="group-btn">
                <Button
                   onClick={() => {
-                     dispatch(removeAllCartItem());
+                     dispatch(cartAction.removeAllCart(_));
                   }}
                   disabled={carts.length === 0}
                >

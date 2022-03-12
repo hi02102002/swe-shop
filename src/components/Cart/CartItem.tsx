@@ -1,5 +1,5 @@
 import Box from 'components/Box';
-import { removeCartItem, updateAmountCartItem } from 'features/cartSlice';
+import { cartAction } from 'features/cart';
 import { useAppDispatch } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
@@ -20,7 +20,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
    ) => {
       e.stopPropagation();
       dispatch(
-         removeCartItem({
+         cartAction.removeCartItem({
             productId: cart.productId,
             size: cart.size,
          })
@@ -29,7 +29,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
 
    useEffect(() => {
       dispatch(
-         updateAmountCartItem({
+         cartAction.updateAmountCartItem({
             productId: cart.productId,
             size: cart.size,
             amount: amount,
@@ -66,7 +66,7 @@ const CartItem: React.FC<Props> = ({ cart }) => {
                   setAmount={setAmount}
                   onRemove={() => {
                      dispatch(
-                        removeCartItem({
+                        cartAction.removeCartItem({
                            productId: cart.productId,
                            size: cart.size,
                         })

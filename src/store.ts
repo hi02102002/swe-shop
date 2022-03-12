@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import authSlice from 'features/authSlice';
-import cartSlice from 'features/cartSlice';
+import { authReducer } from 'features/auth';
+import { cartReducer } from 'features/cart';
 import productsSlice from 'features/productsSlice';
 import toastSlide from 'features/toastSlide';
 import { middleware } from 'middleware';
@@ -28,16 +28,10 @@ const authPersistConfig = {
    blacklist: ['login', 'register'],
 };
 
-const cartsPersistConfig = {
-   key: 'carts',
-   storage: storage,
-   blacklist: ['totalPrice', 'loading', 'error'],
-};
-
 const rootReducer = combineReducers({
-   auth: persistReducer(authPersistConfig, authSlice),
+   auth: persistReducer(authPersistConfig, authReducer),
    products: productsSlice,
-   carts: persistReducer(cartsPersistConfig, cartSlice),
+   carts: cartReducer,
    toast: toastSlide,
 });
 

@@ -127,3 +127,15 @@ export const Total = styled(Box)`
    align-items: center;
    justify-content: space-between;
 `;
+
+export const Loading = styled.div`
+   z-index: 3;
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(0, 0, 0, 0.7);
+`;

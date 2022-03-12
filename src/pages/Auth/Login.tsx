@@ -1,8 +1,9 @@
 import Button from 'components/Button';
 import InputField from 'components/InputField';
 import Spinner from 'components/Spinner';
-import { authSelector, handleLogin } from 'features/authSlice';
-import { getAllCarts } from 'features/cartSlice';
+import { authAction } from 'features/auth/auth.action';
+import { authSelector } from 'features/auth/authSlice';
+import { cartAction } from 'features/cart';
 import { addToastItem } from 'features/toastSlide';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -24,12 +25,12 @@ const Login = () => {
       },
       onSubmit: async ({ email, password }, actions) => {
          const resultAction = await dispatch(
-            handleLogin({
+            authAction.handleLogin({
                email,
                password,
             })
          );
-         if (handleLogin.fulfilled.match(resultAction)) {
+         if (authAction.handleLogin.fulfilled.match(resultAction)) {
             dispatch(
                addToastItem({
                   id: v4(),
@@ -39,9 +40,9 @@ const Login = () => {
             );
             form.resetForm();
             navigate(-1);
-            dispatch(getAllCarts(resultAction.payload.user.uid));
+            dispatch(cartAction.getAllCarts(resultAction.payload.user.uid));
          }
-         if (handleLogin.rejected.match(resultAction)) {
+         if (authAction.handleLogin.rejected.match(resultAction)) {
             dispatch(
                addToastItem({
                   id: v4(),

@@ -1,17 +1,23 @@
 import Box from 'components/Box';
 import Cart from 'components/Cart';
-import { authSelector } from 'features/authSlice';
-import { cartsSelector } from 'features/cartSlice';
-import { useAppSelector } from 'hooks';
+import { authAction } from 'features/auth/auth.action';
+import { authSelector } from 'features/auth/authSlice';
+import { cartAction } from 'features/cart';
+import { cartsSelector } from 'features/cart/cartSlice';
+import { addToastItem } from 'features/toastSlide';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { IMGS } from 'images';
+import _ from 'lodash';
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { v4 } from 'uuid';
 import { HeaderContainer, StyledHeader } from './styles';
 
 const Header = () => {
    const { accessToken } = useAppSelector(authSelector);
-   const { carts } = useAppSelector(cartsSelector);
    const [showCart, setShowCart] = useState<boolean>(false);
+   const { carts } = useAppSelector(cartsSelector);
+   const dispatch = useAppDispatch();
 
    const totalAmountCart = useMemo(() => {
       return carts.reduce(
@@ -51,6 +57,25 @@ const Header = () => {
                         />
                      )}
                   </Box>
+                  {accessToken ? (
+                     <div
+                        onClick={async () => {
+                           await dispatch(authAction.handleLogout(_));
+                           await dispatch(cartAction.umountCart());
+                           dispatch(
+                              addToastItem({
+                                 id: v4(),
+                                 content: 'Logout successful!',
+                                 type: 'SUCCESS',
+                              })
+                           );
+                        }}
+                     >
+                        Log out
+                     </div>
+                  ) : (
+                     <Link to={'/auth'}>Login - Register</Link>
+                  )}
                </Box>
             </HeaderContainer>
          </div>

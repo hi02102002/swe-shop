@@ -2,8 +2,10 @@ import Box from 'components/Box';
 import Button from 'components/Button';
 import InputAmount from 'components/InputAmount';
 import Sizes from 'components/Sizes';
-import { authSelector } from 'features/authSlice';
-import { addToCart } from 'features/cartSlice';
+import Spinner from 'components/Spinner';
+import { authSelector } from 'features/auth/authSlice';
+import { cartAction } from 'features/cart';
+import { cartsSelector } from 'features/cart/cartSlice';
 import { addToastItem } from 'features/toastSlide';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import React, { useState } from 'react';
@@ -30,8 +32,9 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
    const { currentUser, accessToken } = useAppSelector(authSelector);
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
+   const { add } = useAppSelector(cartsSelector);
 
-   const handleAddToCart = () => {
+   const handleAddToCart = async () => {
       if (!accessToken) {
          onClose();
          dispatch(
@@ -44,9 +47,8 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
          navigate('/auth');
          return;
       }
-      dispatch(
-         addToCart({
-            amount: amount,
+      await dispatch(
+         cartAction.addToCart({
             color: product.color,
             id: product.id,
             img: product.imgs[0],
@@ -55,6 +57,7 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
             size: choseSize,
             userId: currentUser?.uid as string,
             productId: product.productId,
+            amount: amount,
          })
       );
       dispatch(
@@ -102,7 +105,9 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
                      <InputAmount amount={amount} setAmount={setAmount} />
                   </Box>
                   <div className="button-group">
-                     <Button onClick={handleAddToCart}>Add to cart</Button>
+                     <Button onClick={handleAddToCart}>
+                        {add.loading ? <Spinner /> : 'Add to cart'}
+                     </Button>
                      <Button
                         onClick={() => {
                            navigate(`${product.id}`);

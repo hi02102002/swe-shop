@@ -2,8 +2,10 @@ import Box from 'components/Box';
 import Button from 'components/Button';
 import InputAmount from 'components/InputAmount';
 import Sizes from 'components/Sizes';
-import { authSelector } from 'features/authSlice';
-import { addToCart } from 'features/cartSlice';
+import Spinner from 'components/Spinner';
+import { authSelector } from 'features/auth/authSlice';
+import { cartAction } from 'features/cart';
+import { cartsSelector } from 'features/cart/cartSlice';
 import { addToastItem } from 'features/toastSlide';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import React, { useState } from 'react';
@@ -20,8 +22,9 @@ const Content: React.FC<{
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
    const { currentUser, accessToken } = useAppSelector(authSelector);
+   const { add } = useAppSelector(cartsSelector);
 
-   const handleAddToCart = () => {
+   const handleAddToCart = async () => {
       if (!accessToken) {
          dispatch(
             addToastItem({
@@ -33,8 +36,8 @@ const Content: React.FC<{
          navigate('/auth');
          return;
       }
-      dispatch(
-         addToCart({
+      await dispatch(
+         cartAction.addToCart({
             amount: amount,
             color: product?.color as string,
             id: product?.id as string,
@@ -77,7 +80,9 @@ const Content: React.FC<{
             <p>{product?.desc}</p>
          </Box>
          <Box className="btn-group">
-            <Button onClick={handleAddToCart}>Add to cart</Button>
+            <Button onClick={handleAddToCart} disabled={add.loading}>
+               {add.loading ? <Spinner /> : 'Add to cart'}
+            </Button>
             <Button>Add to wishlist</Button>
          </Box>
       </StyledContent>

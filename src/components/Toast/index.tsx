@@ -29,7 +29,7 @@ const Toast: React.FC<Props> = ({ bottom, left, right, top }) => {
       }
       const timer = setTimeout(() => {
          dispatch(removeToastItem({ id: toasts[0].id }));
-      }, 3500);
+      }, 1500);
       return () => clearTimeout(timer);
    }, [dispatch, toasts]);
    return createPortal(
