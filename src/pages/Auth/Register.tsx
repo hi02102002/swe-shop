@@ -2,7 +2,6 @@ import Button from 'components/Button';
 import InputField from 'components/InputField';
 import Spinner from 'components/Spinner';
 import { authAction, authSelector } from 'features/auth';
-import { cartAction } from 'features/cart';
 import { addToastItem } from 'features/toastSlide';
 import { useFormik } from 'formik';
 import { useAppSelector } from 'hooks';
@@ -45,7 +44,6 @@ const Register = () => {
             );
             form.resetForm();
             navigate(-1);
-            dispatch(cartAction.getAllCarts(resultAction.payload.user.uid));
          }
 
          if (authAction.handleRegister.rejected.match(resultAction)) {
@@ -90,6 +88,7 @@ const Register = () => {
                   form.errors.firstName && form.touched.firstName
                )}
                errorText={form.errors.firstName}
+               typeInput="input"
             />
             <InputField
                label="Last name*"
@@ -101,6 +100,7 @@ const Register = () => {
                onBlur={form.handleBlur}
                isError={Boolean(form.errors.lastName && form.touched.lastName)}
                errorText={form.errors.lastName}
+               typeInput="input"
             />
             <InputField
                label="Email address*"
@@ -112,6 +112,7 @@ const Register = () => {
                onBlur={form.handleBlur}
                isError={Boolean(form.errors.email && form.touched.email)}
                errorText={form.errors.email}
+               typeInput="input"
             />
             <InputField
                label="Password*"
@@ -123,6 +124,7 @@ const Register = () => {
                onBlur={form.handleBlur}
                isError={Boolean(form.errors.password && form.touched.password)}
                errorText={form.errors.password}
+               typeInput="input"
             />
             <InputField
                label="Confirm password*"
@@ -136,6 +138,7 @@ const Register = () => {
                   form.errors.confirmPassword && form.touched.confirmPassword
                )}
                errorText={form.errors.confirmPassword}
+               typeInput="input"
             />
             <Button type="submit" disabled={!(form.isValid && form.dirty)}>
                {loading ? <Spinner /> : 'Register'}

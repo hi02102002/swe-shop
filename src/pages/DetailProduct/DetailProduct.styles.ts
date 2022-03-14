@@ -4,7 +4,11 @@ export const StyledDetailProduct = styled.div`
    padding: 3rem 0;
 `;
 
-export const StyledContainer = styled.div``;
+export const StyledContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+   row-gap: 3rem;
+`;
 
 export const StyledMain = styled.div`
    display: flex;

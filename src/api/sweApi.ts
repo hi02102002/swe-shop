@@ -1,5 +1,9 @@
-import { CartItem, ProductItem } from 'shared/types';
+import { CartItem, ProductItem, ReviewItem } from 'shared/types';
+import { WishlistItem } from './../shared/types';
 import { request } from './axiosClient';
+
+const BASE_URL_2 = 'https://622defcb8d943bae348a7262.mockapi.io/api/';
+
 export const sweApi = {
    getAllProducts: (params?: any) => {
       return request.get<ProductItem[]>('products', {
@@ -28,5 +32,28 @@ export const sweApi = {
    },
    removeCartItem: (id: string) => {
       return request.delete(`carts/${id}`);
+   },
+   getAllWishList: (userId: string) => {
+      return request.get<WishlistItem[]>('wishlist');
+   },
+   getAllReviews: (productId: string) => {
+      return request.get<ReviewItem[]>('comments', {
+         baseURL: BASE_URL_2,
+         params: {
+            productId,
+         },
+      });
+   },
+
+   addReview: (review: ReviewItem) => {
+      return request.post<ReviewItem>(
+         'comments',
+         {
+            ...review,
+         },
+         {
+            baseURL: BASE_URL_2,
+         }
+      );
    },
 };

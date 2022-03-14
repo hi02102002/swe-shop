@@ -50,18 +50,20 @@ const Product: React.FC<Props> = ({ product, type }) => {
                   <BsEye />
                </StyledButtonQuickView>
                <StyledImg>
-                  <div className="inner">
-                     <img
-                        src={product.imgs[0]}
-                        alt={product.name}
-                        className="front"
-                     />
-                     <img
-                        src={product.imgs[1]}
-                        alt={product.name}
-                        className="back"
-                     />
-                  </div>
+                  <Link to={`/products/${product.id}`}>
+                     <div className="inner">
+                        <img
+                           src={product.imgs[0]}
+                           alt={product.name}
+                           className="front"
+                        />
+                        <img
+                           src={product.imgs[1]}
+                           alt={product.name}
+                           className="back"
+                        />
+                     </div>
+                  </Link>
                </StyledImg>
             </Box>
             <StyledName>

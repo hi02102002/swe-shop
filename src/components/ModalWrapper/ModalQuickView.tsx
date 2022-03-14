@@ -47,7 +47,7 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
          navigate('/auth');
          return;
       }
-      await dispatch(
+      const actionAddCart = await dispatch(
          cartAction.addToCart({
             color: product.color,
             id: product.id,
@@ -60,13 +60,16 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
             amount: amount,
          })
       );
-      dispatch(
-         addToastItem({
-            id: uuid(),
-            content: 'You add product to cart successful!',
-            type: 'SUCCESS',
-         })
-      );
+
+      if (cartAction.addToCart.fulfilled.match(actionAddCart)) {
+         dispatch(
+            addToastItem({
+               id: uuid(),
+               content: 'You add product to cart successful!',
+               type: 'SUCCESS',
+            })
+         );
+      }
    };
 
    return (

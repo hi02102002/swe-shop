@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 import { ProductItem } from 'shared/types';
 import Content from './components/Content';
 import ImageLibrary from './components/ImageLibrary';
+import Reviews from './components/Reviews';
+import SimilarProduct from './components/SimilarProduct';
 import {
    StyledContainer,
    StyledDetailProduct,
@@ -34,6 +36,10 @@ const DetailProduct = () => {
       getProductHandler();
    }, [productId]);
 
+   useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+   }, [productId]);
+
    return isLoading && !product ? (
       <Loader />
    ) : (
@@ -49,6 +55,11 @@ const DetailProduct = () => {
                      <ImageLibrary images={product?.imgs as string[]} />
                      <Content product={product} />
                   </StyledMain>
+                  <Reviews productId={product?.productId as string} />
+                  <SimilarProduct
+                     types={product?.types as string[]}
+                     productId={product?.productId as string}
+                  />
                </StyledContainer>
             </div>
          </StyledDetailProduct>

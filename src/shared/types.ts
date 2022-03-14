@@ -22,8 +22,31 @@ export interface CartItem {
    productId: string;
 }
 
+export interface WishlistItem {
+   name: string;
+   price: number;
+   size: string[];
+   desc: string;
+   imgs: string[];
+   userId: string;
+   productId: string;
+   wishListId: string;
+   id: string;
+}
+
 export interface ToastItem {
    id: string;
    content: string;
    type: 'SUCCESS' | 'ERROR' | 'WARN';
+}
+
+export interface ReviewItem {
+   createdAt: string;
+   name: string;
+   content: string;
+   star: number;
+   userId: string;
+   productId: string;
+   id: string;
+   title: string;
 }

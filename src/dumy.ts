@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const products = [
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'REVERSE TIE DYE HOODIE',
       price: 699.0,
@@ -15,6 +16,7 @@ export const products = [
       desc: 'Áo hoodie chui đầu có nón.\nChất liệu nỉ chân cua.\nÁo được nhuộm tiedye thủ công',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'REVERSE TIE DYE PANTS',
       price: 300.0,
@@ -29,6 +31,7 @@ export const products = [
       desc: 'Chất liệu nỉ chân cua\nQuần được nhuộm tiedye thủ công\nLogo được in kéo lụa',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'NFSWE - TAN',
       price: 300.0,
@@ -43,35 +46,22 @@ export const products = [
       desc: 'Form áo Châu Âu.\nĐịnh lượng : 220 gsm.\n100% cotton.\nSản phẩm được in lụa.\nTag logo được gắn ở tay áo.Tem chống hàng giả của SWE được may trong sườn áo.Các bạn vui lòng tham khảo bảng size chart trước khi đặt hàng.',
    },
    {
-      productId: uuidv4(),
-      name: 'MENTAL HOODIE - TAUPE',
-      price: 590.0,
-      size: ['S', 'M', 'L'],
-      types: ['outerwear', 'hoodie'],
-      color: 'pink',
-      imgs: [
-         'https://product.hstatic.net/1000344185/product/057_e2d23e49fd694d7bb7ad42bb52112f2a_master.jpg',
-         'https://product.hstatic.net/1000344185/product/0577_247816b90b214eeaad05c728a0f57cce_master.jpg',
-         'https://product.hstatic.net/1000344185/product/0578_5a1768a73b634c008ff2b351d209b1ec_master.jpg',
-         'https://product.hstatic.net/1000344185/product/0682_3fd4fed224c145e584e4e86695a7170e_master.jpg',
-      ],
-      desc: 'Áo hoodie chui đầu có nón.\nChất liệu nỉ bông 100% cotton.\nHình in được in kéo lụa.',
-   },
-   {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'MENTAL HOODIE - TAUPE',
       price: 569.0,
       size: ['S', 'M', 'L'],
       types: ['outerwear', 'hoodie'],
       imgs: [
-         'https://product.hstatic.net/1000344185/product/057_e2d23e49fd694d7bb7ad42bb52112f2a_master.jpg',
          'https://product.hstatic.net/1000344185/product/0577_247816b90b214eeaad05c728a0f57cce_master.jpg',
          'https://product.hstatic.net/1000344185/product/0578_5a1768a73b634c008ff2b351d209b1ec_master.jpg',
+         'https://product.hstatic.net/1000344185/product/057_e2d23e49fd694d7bb7ad42bb52112f2a_master.jpg',
          'https://product.hstatic.net/1000344185/product/0682_3fd4fed224c145e584e4e86695a7170e_master.jpg',
       ],
       desc: 'Áo hoodie chui đầu có nón.\nChất liệu nỉ bông 100% cotton.\nHình in được in kéo lụa.',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'MENTAL HOODIE - TAUPE',
       price: 590.0,
@@ -79,14 +69,15 @@ export const products = [
       types: ['outerwear', 'hoodie'],
       color: 'black',
       imgs: [
-         'https://product.hstatic.net/1000344185/product/056__1__c12610e80b184ed0883fce0c5f884efa_master.jpg',
          'https://product.hstatic.net/1000344185/product/0569_c4652a9c05d74a2dacff01a578da3304_master.jpg',
          'https://product.hstatic.net/1000344185/product/0574_85ebc60ffebf4422abfd0fa5c4849cad_1024x1024.jpg',
+         'https://product.hstatic.net/1000344185/product/056__1__c12610e80b184ed0883fce0c5f884efa_master.jpg',
          'https://product.hstatic.net/1000344185/product/0686_bcc50d5b9b73446387213d632cef811f_master.jpg',
       ],
       desc: 'Áo hoodie chui đầu có nón.\nChất liệu nỉ bông 100% cotton.Hình in được in kéo lụa.',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'STRIPED JEANS - BLACK',
       price: 450.0,
@@ -105,6 +96,7 @@ export const products = [
       desc: 'Chất liệu vải jeans.\noạ tiết được in được kéo lụa tràn vải.Túi vải sau được thêu logo tia sét.\nhần chi tiết nút quần là logo SWE in nổi.\nCác bạn vui lòng xem kỹ bảng size hoặc liên hệ nhân viên để tư vấn size phù hợp.',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'MONO TRACK JACKET - BLUE',
       price: 500.0,
@@ -120,6 +112,7 @@ export const products = [
       desc: 'Áo khoác dù 2 lớp, dày dặn.Logo SWE được in lụa.Form Châu ÂuKhoá kéo YKK với thiết kế logo cube SWE dập nổi.',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE WOMEN SPORT - WHITE',
       price: 259.0,
@@ -137,6 +130,7 @@ export const products = [
       desc: '',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE WOMEN SPORT - BLACK',
       price: 259.0,
@@ -154,23 +148,7 @@ export const products = [
       desc: '',
    },
    {
-      productId: uuidv4(),
-      name: 'SWE WOMEN SPORT - BLACK',
-      price: 259.0,
-      size: ['S', 'M', 'L', 'XL'],
-      types: ['full', 'bikini'],
-      color: 'white',
-      imgs: [
-         'https://product.hstatic.net/1000344185/product/85122_90c1f04ea0814790adba77785cee5856_master.jpg',
-         'https://product.hstatic.net/1000344185/product/5758_643d9d679ee54512bbc5621952db118f_master.jpg',
-         'https://product.hstatic.net/1000344185/product/5757_4aa2ca749a134cc6a25f0e50a97bfd80_master.jpg',
-         'https://product.hstatic.net/1000344185/product/5734_5fd0fa7c47e845b980aa6585e4d5585d_master.jpg',
-         'https://product.hstatic.net/1000344185/product/575_ca85c2a29f3f4c7b8b69784e44d53063_master.jpg',
-         'https://product.hstatic.net/1000344185/product/573_29ed58939f504a09ade51e8af88ddc9f_master.jpg',
-      ],
-      desc: '',
-   },
-   {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE BOXER BRIEFS - WHITE ( 3 PACK )',
       price: 399.0,
@@ -185,6 +163,7 @@ export const products = [
       desc: '',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE WOMEN BRA - BLACK',
       price: 159.0,
@@ -200,6 +179,7 @@ export const products = [
       desc: '',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: '47K TEE - SALSA',
       price: 320.0,
@@ -214,6 +194,7 @@ export const products = [
       desc: 'Form áo Châu Âu.\nĐịnh lượng : 220 gsm.\n100% cotton.Sản phẩm được in hiệu ứng giả thêu.Tag logo được gắn ở tay áo.Tem chống hàng giả của SWE được may trong sườn áo.\nCác bạn vui lòng tham khảo bảng size chart trước khi đặt hàng.',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: '47K TEE - TEAL',
       price: 224.0,
@@ -228,6 +209,7 @@ export const products = [
       desc: 'Form áo Châu Âu.\nĐịnh lượng : 220 gsm.\n100% cotton.Sản phẩm được in hiệu ứng giả thêu.Tag logo được gắn ở tay áo.Tem chống hàng giả của SWE được may trong sườn áo.\nCác bạn vui lòng tham khảo bảng size chart trước khi đặt hàng.',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE DENIM VARSITY JACKET - BLACK',
       price: 850.0,
@@ -247,6 +229,7 @@ export const products = [
       desc: 'Bo gân với colorway : xanh đen & kem.\nChất liệu : denim.\nCác hoạ tiết được thêu vi tính.',
    },
    {
+      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE DENIM VARSITY JACKET - BLUE',
       price: 850.0,

@@ -8,7 +8,7 @@ import { cartAction } from 'features/cart';
 import { cartsSelector } from 'features/cart/cartSlice';
 import { addToastItem } from 'features/toastSlide';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProductItem } from 'shared/types';
 import { v4 } from 'uuid';
@@ -17,7 +17,7 @@ import { StyledContent } from './Content.styles';
 const Content: React.FC<{
    product: ProductItem | null;
 }> = ({ product }) => {
-   const [chooseSize, setChooseSize] = useState(product?.size[0]);
+   const [chooseSize, setChooseSize] = useState('');
    const [amount, setAmount] = useState<number>(1);
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
@@ -57,6 +57,10 @@ const Content: React.FC<{
          })
       );
    };
+
+   useEffect(() => {
+      setChooseSize(product?.size[0] as string);
+   }, [product]);
 
    return (
       <StyledContent>

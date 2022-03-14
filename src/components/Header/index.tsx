@@ -34,9 +34,8 @@ const Header = () => {
                   <img src={IMGS.logo} alt="" />
                </Link>
                <Box>
-                  <Link to={accessToken ? '/my-account' : '/auth'}>
-                     My account
-                  </Link>
+                  <Link to={'/my-account'}>My account</Link>
+                  <Link to={'/wishlist'}>Wishlist</Link>
                   <div>Search</div>
                   <Box>
                      <div

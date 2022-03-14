@@ -3,7 +3,6 @@ import InputField from 'components/InputField';
 import Spinner from 'components/Spinner';
 import { authAction } from 'features/auth/auth.action';
 import { authSelector } from 'features/auth/authSlice';
-import { cartAction } from 'features/cart';
 import { addToastItem } from 'features/toastSlide';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -40,7 +39,6 @@ const Login = () => {
             );
             form.resetForm();
             navigate(-1);
-            dispatch(cartAction.getAllCarts(resultAction.payload.user.uid));
          }
          if (authAction.handleLogin.rejected.match(resultAction)) {
             dispatch(
@@ -74,6 +72,7 @@ const Login = () => {
                value={form.values.email}
                isError={Boolean(form.errors.email && form.touched.email)}
                errorText={form.errors.email}
+               typeInput="input"
             />
             <InputField
                label="Password"
@@ -83,6 +82,7 @@ const Login = () => {
                onChange={form.handleChange}
                onBlur={form.handleBlur}
                value={form.values.password}
+               typeInput="input"
             />
             <Button type="submit" disabled={!(form.isValid && form.dirty)}>
                {loading ? <Spinner /> : 'Login'}

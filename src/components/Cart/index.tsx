@@ -5,6 +5,7 @@ import { cartsSelector } from 'features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import _ from 'lodash';
 import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
    CartBottom,
    CartList,
@@ -19,6 +20,8 @@ const Cart: React.FC<{
 }> = ({ onClose }) => {
    const { carts, remove } = useAppSelector(cartsSelector);
    const dispatch = useAppDispatch();
+   const navigate = useNavigate();
+
    const total = useMemo(() => {
       return carts.reduce((perviousValue, currentValue) => {
          return (perviousValue += currentValue.amount * currentValue.price);
@@ -55,7 +58,14 @@ const Cart: React.FC<{
                >
                   Remove All
                </Button>
-               <Button disabled={carts.length === 0}>Check out</Button>
+               <Button
+                  disabled={carts.length === 0}
+                  onClick={() => {
+                     navigate('/view-cart');
+                  }}
+               >
+                  View in your cart
+               </Button>
             </div>
          </CartBottom>
       </StyledCart>

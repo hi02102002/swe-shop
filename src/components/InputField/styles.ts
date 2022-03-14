@@ -12,10 +12,10 @@ export const StyledInputField = styled.div<{
       font-size: inherit;
    }
 
-   input {
+   .input {
       height: 3.75rem;
       padding: 1.2rem 1.6rem;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       background-color: var(--swe-white);
       line-height: 1.25;
       border-radius: 6px;
@@ -33,5 +33,13 @@ export const StyledInputField = styled.div<{
    p {
       font-size: 1.1rem;
       color: red;
+   }
+
+   textarea.input {
+      height: unset;
+      min-height: 13rem;
+      resize: none;
+      font-size: inherit;
+      font-family: inherit;
    }
 `;
