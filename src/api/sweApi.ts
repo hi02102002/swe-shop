@@ -10,9 +10,17 @@ export const sweApi = {
          params,
       });
    },
+
    getProduct: (id: string) => {
       return request.get<ProductItem>(`products/${id}`);
    },
+
+   addWishList: (id: string, product: ProductItem) => {
+      return request.put<ProductItem>(`/products/${id}`, {
+         ...product,
+      });
+   },
+
    getAllCarts: (userId: string) => {
       return request.get<CartItem[]>('carts', {
          params: {
@@ -36,11 +44,13 @@ export const sweApi = {
    getAllWishList: (userId: string) => {
       return request.get<WishlistItem[]>('wishlist');
    },
-   getAllReviews: (productId: string) => {
+   getAllReviews: (productId: string, page?: number, limit?: number) => {
       return request.get<ReviewItem[]>('comments', {
          baseURL: BASE_URL_2,
          params: {
             productId,
+            page,
+            limit,
          },
       });
    },

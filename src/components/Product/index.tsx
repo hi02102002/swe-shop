@@ -1,5 +1,7 @@
 import Box from 'components/Box';
 import ModalQuickView from 'components/ModalWrapper/ModalQuickView';
+import { addWishList } from 'features/productsSlice';
+import { useAppDispatch } from 'hooks';
 import React, { useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
@@ -22,12 +24,25 @@ interface Props {
 const Product: React.FC<Props> = ({ product, type }) => {
    const [activeModalQuickView, setActiveModalQuickView] =
       useState<boolean>(false);
+   const dispatch = useAppDispatch();
 
    return (
       <>
          <StyledProduct>
             {type === 'product' && (
-               <StyledButtonWishlist tooltip="Add to wishlist">
+               <StyledButtonWishlist
+                  tooltip="Add to wishlist"
+                  onClick={() => {
+                     dispatch(
+                        addWishList({
+                           product: {
+                              ...product,
+                              isWishlist: true,
+                           },
+                        })
+                     );
+                  }}
+               >
                   <AiOutlineHeart />
                </StyledButtonWishlist>
             )}

@@ -40,6 +40,12 @@ const DetailProduct = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
    }, [productId]);
 
+   useEffect(() => {
+      if (product) {
+         document.title = `${product?.name} - SWE`;
+      }
+   }, [product]);
+
    return isLoading && !product ? (
       <Loader />
    ) : (

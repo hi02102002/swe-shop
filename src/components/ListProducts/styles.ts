@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const StyledListProducts = styled.ul<{
+export const StyledListProducts = styled(motion.ul)<{
    col?: number;
 }>`
    --col: ${(p) => p.col || 4};

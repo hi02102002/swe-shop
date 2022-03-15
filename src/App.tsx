@@ -30,6 +30,8 @@ const App = () => {
    const { currentUser } = useAppSelector(authSelector);
    const dispatch = useAppDispatch();
 
+   console.log(currentUser);
+
    useEffect(() => {
       if (currentUser) {
          dispatch(cartAction.getAllCarts(currentUser.uid));
@@ -77,7 +79,9 @@ const App = () => {
                path="/view-cart"
                element={
                   <Suspense fallback={<Loader />}>
-                     <ShoppingCart />
+                     <RequireAuth>
+                        <ShoppingCart />
+                     </RequireAuth>
                   </Suspense>
                }
             />

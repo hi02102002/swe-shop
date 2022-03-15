@@ -69,7 +69,7 @@ export const GlobalStyle = createGlobalStyle`
       box-sizing:border-box;
       -webkit-text-size-adjust:100%;
       -webkit-tap-highlight-color:transparent;
-      font-family:'Francois One','Roboto', sans-serif ;
+      font-family:'Francois One';
       
   }
 

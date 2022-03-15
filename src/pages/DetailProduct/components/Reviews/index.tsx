@@ -21,8 +21,10 @@ const Reviews: React.FC<{
    useEffect(() => {
       const handleGetReviews = async () => {
          if (productId) {
-            const { data } = await sweApi.getAllReviews(productId);
-            setReviews(data);
+            const { data } = await sweApi.getAllReviews(productId, 1, 10);
+            setReviews(
+               data.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+            );
          }
       };
       handleGetReviews();
@@ -70,9 +72,9 @@ const Reviews: React.FC<{
                         <div className="rate">
                            {[1, 2, 3, 4, 5].map((value) => {
                               return value <= review.star ? (
-                                 <AiFillStar />
+                                 <AiFillStar key={v4()} />
                               ) : (
-                                 <AiOutlineStar />
+                                 <AiOutlineStar key={v4()} />
                               );
                            })}
                         </div>

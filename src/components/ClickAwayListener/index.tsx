@@ -1,9 +1,10 @@
+import { AnimationProps, motion, MotionProps } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
-
 const ClickAwayListener: React.FC<{
    onClickAway: () => any;
    className?: string;
-}> = ({ onClickAway, className, children }) => {
+   animation?: AnimationProps & MotionProps;
+}> = ({ onClickAway, className, children, animation }) => {
    const rootRef = useRef<HTMLDivElement | null>(null);
 
    useEffect(() => {
@@ -19,9 +20,9 @@ const ClickAwayListener: React.FC<{
    }, [onClickAway]);
 
    return (
-      <div ref={rootRef} className={className}>
+      <motion.div ref={rootRef} className={className} {...animation}>
          {children}
-      </div>
+      </motion.div>
    );
 };
 

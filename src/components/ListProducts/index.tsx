@@ -1,4 +1,5 @@
 import Product from 'components/Product';
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import { ProductItem } from 'shared/types';
 import { StyledListProducts } from './styles';
@@ -6,16 +7,26 @@ import { StyledListProducts } from './styles';
 const ListProducts: React.FC<{
    products: ProductItem[];
    type?: 'product' | 'wishlist';
-}> = ({ products, type }) => {
+   col?: number;
+}> = ({ products, type, col }) => {
    return (
-      <StyledListProducts>
-         {products.map((product) => {
-            return (
-               <li key={product.productId}>
-                  <Product product={product} type={type} />
-               </li>
-            );
-         })}
+      <StyledListProducts col={col}>
+         <AnimatePresence>
+            {products.map((product) => {
+               return (
+                  <motion.li
+                     key={product.productId}
+                     layout
+                     initial={{ opacity: 0 }}
+                     animate={{ opacity: 1 }}
+                     exit={{ opacity: 0 }}
+                     transition={{ duration: 0.5 }}
+                  >
+                     <Product product={product} type={type} />
+                  </motion.li>
+               );
+            })}
+         </AnimatePresence>
       </StyledListProducts>
    );
 };

@@ -51,6 +51,7 @@ const FormReview: React.FC<{
             setSuccess('Thank for your review!');
             setError('');
             setLoading(false);
+            console.log(data);
          } catch (error) {
             console.log(error);
             setLoading(false);

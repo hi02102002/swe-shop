@@ -4,10 +4,12 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 const RequireAuth: React.FC = ({ children }) => {
-   const { accessToken } = useAppSelector(authSelector);
+   const { currentUser } = useAppSelector(authSelector);
    const location = useLocation();
 
-   if (!accessToken) {
+   console.log(currentUser);
+
+   if (currentUser === null) {
       return <Navigate to="/auth" state={{ from: location }} replace />;
    }
 

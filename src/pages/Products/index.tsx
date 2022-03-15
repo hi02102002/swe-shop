@@ -4,15 +4,17 @@ import ListProducts from 'components/ListProducts';
 import Loader from 'components/Loader';
 import { getAllProducts, productsSelector } from 'features/productsSlice';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import FilterHeader from './components/FilterHeader';
 import { StyledProducts } from './styles';
 
 const Products = () => {
    const dispatch = useAppDispatch();
-   const { products, loading } = useAppSelector(productsSelector);
+   const { filter, loading } = useAppSelector(productsSelector);
+   const [col, setCol] = useState<number>(4);
 
    useEffect(() => {
-      dispatch(getAllProducts());
+      dispatch(getAllProducts(undefined));
    }, [dispatch]);
 
    useEffect(() => {
@@ -23,10 +25,16 @@ const Products = () => {
       <Loader />
    ) : (
       <Layout>
+         <Hero content="Products" path="Products" />
          <StyledProducts>
-            <Hero content="Products" path="Products" />
             <div className="container">
-               <ListProducts products={products} type="product" />
+               <FilterHeader
+                  setCol={(col) => {
+                     setCol(col);
+                  }}
+                  col={col}
+               />
+               <ListProducts products={filter} type="product" col={col} />
             </div>
          </StyledProducts>
       </Layout>
