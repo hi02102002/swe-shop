@@ -7,6 +7,7 @@ export const StyledFormReview = styled.form`
    max-width: 768px;
    width: 100%;
    margin: 0 auto;
+   transition: height 0.3s ease;
 
    .btn-group {
       display: flex;

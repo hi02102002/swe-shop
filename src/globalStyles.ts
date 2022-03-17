@@ -59,6 +59,20 @@ export const GlobalStyle = createGlobalStyle`
     --swe-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   }
 
+  @media screen and (max-width: 767.98px) {
+  :root{
+    --swe-heading-font-size-h1: 56px;
+    --swe-heading-font-size-h2: 44px;
+    --swe-heading-font-size-h3: 32px;
+    --swe-heading-font-size-h4: 24px;
+    --swe-heading-font-size-h5: 16px;
+    --swe-heading-font-size-h6: 14px;
+    --swe-base-font-size: 12px;
+
+  }
+  }
+  
+
   *,*::after,*::before{
       box-sizing:inherit;
       padding: 0;margin: 0;

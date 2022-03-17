@@ -19,10 +19,6 @@ export const StyledListProducts = styled(motion.ul)<{
       --col: ${(p) => (p.col ? p.col - 2 : 2)};
    }
 
-   @media screen and (max-width: 639.98px) {
-      --col: ${(p) => (p.col ? p.col - 3 : 2)};
-   }
-
    @media screen and (max-width: 374.98px) {
       --col: 1;
    }

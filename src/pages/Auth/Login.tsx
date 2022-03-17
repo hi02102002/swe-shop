@@ -6,14 +6,21 @@ import { authSelector } from 'features/auth/authSlice';
 import { addToastItem } from 'features/toastSlide';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
 import * as Yup from 'yup';
 import { AuthErrorMessage, StyledForm, StyledHeadingSection } from './styles';
 const Login = () => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
+   const location = useLocation();
+
+   const from = useMemo(() => {
+      // @ts-ignore
+      return location.state?.from?.pathname || '/';
+   }, [location]);
+
    const {
       login: { error, loading },
    } = useAppSelector(authSelector);
@@ -38,7 +45,7 @@ const Login = () => {
                })
             );
             form.resetForm();
-            navigate(-1);
+            navigate(from, { replace: true });
          }
          if (authAction.handleLogin.rejected.match(resultAction)) {
             dispatch(

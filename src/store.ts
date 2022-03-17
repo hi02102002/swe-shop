@@ -3,6 +3,7 @@ import { authReducer } from 'features/auth';
 import { cartReducer } from 'features/cart';
 import productsSlice from 'features/productsSlice';
 import toastSlide from 'features/toastSlide';
+import { wishlistReducer } from 'features/wishlist';
 import { middleware } from 'middleware';
 import {
    FLUSH,
@@ -25,7 +26,7 @@ const rootPersistConfig = {
 const authPersistConfig = {
    key: 'auth',
    storage: storage,
-   blacklist: ['login', 'register'],
+   blacklist: ['login', 'register', 'logout'],
 };
 
 const rootReducer = combineReducers({
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
    products: productsSlice,
    carts: cartReducer,
    toast: toastSlide,
+   wishlist: wishlistReducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

@@ -5,8 +5,8 @@ import { authAction, authSelector } from 'features/auth';
 import { addToastItem } from 'features/toastSlide';
 import { useFormik } from 'formik';
 import { useAppSelector } from 'hooks';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
 import * as Yup from 'yup';
 import { useAppDispatch } from '../../hooks/userAppDispatch';
@@ -14,6 +14,13 @@ import { AuthErrorMessage, StyledForm, StyledHeadingSection } from './styles';
 const Register = () => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
+   const location = useLocation();
+
+   const from = useMemo(
+      // @ts-ignore
+      () => location.state?.from?.pathname || '/',
+      [location]
+   );
    const {
       register: { error, loading },
    } = useAppSelector(authSelector);
@@ -43,7 +50,7 @@ const Register = () => {
                })
             );
             form.resetForm();
-            navigate(-1);
+            navigate(from, { replace: true });
          }
 
          if (authAction.handleRegister.rejected.match(resultAction)) {

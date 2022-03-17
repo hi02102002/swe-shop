@@ -3,21 +3,23 @@ import RequireAuth from 'components/RequireAuth';
 import Toast from 'components/Toast';
 import { authSelector } from 'features/auth';
 import { cartAction } from 'features/cart';
+import { wishlistAction } from 'features/wishlist';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import React, { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-// products.forEach((item) => {
-//    const addItem = async (item: any) => {
+// const addProduct = async () => {
+//    for (const product of products) {
 //       await axios.post(
 //          'https://6223ad753af069a0f9a7e199.mockapi.io/api/products',
 //          {
-//             ...item,
+//             ...product,
 //          }
 //       );
-//    };
-//    addItem(item);
-// });
+//    }
+// };
+
+// addProduct();
 
 const Home = React.lazy(() => import('pages/Home')); // Lazy-loaded
 const Products = React.lazy(() => import('pages/Products')); // Lazy-loaded
@@ -30,11 +32,10 @@ const App = () => {
    const { currentUser } = useAppSelector(authSelector);
    const dispatch = useAppDispatch();
 
-   console.log(currentUser);
-
    useEffect(() => {
       if (currentUser) {
          dispatch(cartAction.getAllCarts(currentUser.uid));
+         dispatch(wishlistAction.getAllWishlist({ userId: currentUser.uid }));
       }
    }, [currentUser, dispatch]);
 

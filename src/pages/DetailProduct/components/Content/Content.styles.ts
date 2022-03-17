@@ -7,6 +7,10 @@ export const StyledContent = styled.div`
    row-gap: 1.5rem;
    flex-shrink: 0;
 
+   @media screen and (max-width: 767.98px) {
+      width: 100% !important;
+   }
+
    .box.color-wrap {
       display: flex;
       align-items: center;

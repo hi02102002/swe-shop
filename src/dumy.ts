@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const products = [
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'REVERSE TIE DYE HOODIE',
       price: 699.0,
@@ -16,7 +15,6 @@ export const products = [
       desc: 'Áo hoodie chui đầu có nón.\nChất liệu nỉ chân cua.\nÁo được nhuộm tiedye thủ công',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'REVERSE TIE DYE PANTS',
       price: 300.0,
@@ -31,7 +29,6 @@ export const products = [
       desc: 'Chất liệu nỉ chân cua\nQuần được nhuộm tiedye thủ công\nLogo được in kéo lụa',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'NFSWE - TAN',
       price: 300.0,
@@ -46,7 +43,6 @@ export const products = [
       desc: 'Form áo Châu Âu.\nĐịnh lượng : 220 gsm.\n100% cotton.\nSản phẩm được in lụa.\nTag logo được gắn ở tay áo.Tem chống hàng giả của SWE được may trong sườn áo.Các bạn vui lòng tham khảo bảng size chart trước khi đặt hàng.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'MENTAL HOODIE - TAUPE',
       price: 569.0,
@@ -61,7 +57,6 @@ export const products = [
       desc: 'Áo hoodie chui đầu có nón.\nChất liệu nỉ bông 100% cotton.\nHình in được in kéo lụa.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'MENTAL HOODIE - TAUPE',
       price: 590.0,
@@ -77,7 +72,6 @@ export const products = [
       desc: 'Áo hoodie chui đầu có nón.\nChất liệu nỉ bông 100% cotton.Hình in được in kéo lụa.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'STRIPED JEANS - BLACK',
       price: 450.0,
@@ -96,7 +90,6 @@ export const products = [
       desc: 'Chất liệu vải jeans.\noạ tiết được in được kéo lụa tràn vải.Túi vải sau được thêu logo tia sét.\nhần chi tiết nút quần là logo SWE in nổi.\nCác bạn vui lòng xem kỹ bảng size hoặc liên hệ nhân viên để tư vấn size phù hợp.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'MONO TRACK JACKET - BLUE',
       price: 500.0,
@@ -112,7 +105,6 @@ export const products = [
       desc: 'Áo khoác dù 2 lớp, dày dặn.Logo SWE được in lụa.Form Châu ÂuKhoá kéo YKK với thiết kế logo cube SWE dập nổi.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE WOMEN SPORT - WHITE',
       price: 259.0,
@@ -130,7 +122,6 @@ export const products = [
       desc: '',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE WOMEN SPORT - BLACK',
       price: 259.0,
@@ -148,7 +139,6 @@ export const products = [
       desc: '',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE BOXER BRIEFS - WHITE ( 3 PACK )',
       price: 399.0,
@@ -163,7 +153,6 @@ export const products = [
       desc: '',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE WOMEN BRA - BLACK',
       price: 159.0,
@@ -179,7 +168,6 @@ export const products = [
       desc: '',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: '47K TEE - SALSA',
       price: 320.0,
@@ -194,7 +182,6 @@ export const products = [
       desc: 'Form áo Châu Âu.\nĐịnh lượng : 220 gsm.\n100% cotton.Sản phẩm được in hiệu ứng giả thêu.Tag logo được gắn ở tay áo.Tem chống hàng giả của SWE được may trong sườn áo.\nCác bạn vui lòng tham khảo bảng size chart trước khi đặt hàng.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: '47K TEE - TEAL',
       price: 224.0,
@@ -209,7 +196,6 @@ export const products = [
       desc: 'Form áo Châu Âu.\nĐịnh lượng : 220 gsm.\n100% cotton.Sản phẩm được in hiệu ứng giả thêu.Tag logo được gắn ở tay áo.Tem chống hàng giả của SWE được may trong sườn áo.\nCác bạn vui lòng tham khảo bảng size chart trước khi đặt hàng.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE DENIM VARSITY JACKET - BLACK',
       price: 850.0,
@@ -229,7 +215,6 @@ export const products = [
       desc: 'Bo gân với colorway : xanh đen & kem.\nChất liệu : denim.\nCác hoạ tiết được thêu vi tính.',
    },
    {
-      isWishlist: false,
       productId: uuidv4(),
       name: 'SWE DENIM VARSITY JACKET - BLUE',
       price: 850.0,

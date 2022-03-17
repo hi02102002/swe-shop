@@ -4,8 +4,9 @@ import Button from 'components/Button';
 import InputField from 'components/InputField';
 import Spinner from 'components/Spinner';
 import { authSelector } from 'features/auth';
+import { AnimatePresence } from 'framer-motion';
 import { useAppSelector } from 'hooks';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { v4 } from 'uuid';
 import InputRating from '../InputStart';
 import { StyledFormReview } from './FormReview.styles';
@@ -21,6 +22,7 @@ const FormReview: React.FC<{
    const [success, setSuccess] = useState<string>('');
    const [loading, setLoading] = useState<boolean>(false);
    const { currentUser } = useAppSelector(authSelector);
+   const formRef = useRef<HTMLFormElement | null>(null);
 
    const able = useMemo(() => {
       return rating !== 0 && title.trim().length > 0 && desc.trim().length > 0;
@@ -70,35 +72,37 @@ const FormReview: React.FC<{
    }, []);
 
    return (
-      <StyledFormReview onSubmit={handleSubmit}>
-         {error.trim().length > 0 && <p className="error">{error}</p>}
-         {success.trim().length > 0 && <p className="success">{success}</p>}
-         <InputRating rating={rating} setRating={setRating} label="Rating" />
-         <InputField
-            typeInput="input"
-            label="Title"
-            onChange={(e: any) => {
-               setTitle(e.target.value);
-            }}
-            value={title}
-         />
-         <InputField
-            typeInput="textarea"
-            label="Description"
-            onChange={(e: any) => {
-               setDesc(e.target.value);
-            }}
-            value={desc}
-         />
-         <Box className="btn-group">
-            <Button type="submit" disabled={loading}>
-               {loading ? <Spinner /> : 'Submit'}
-            </Button>
-            <Button type="button" onClick={onClose}>
-               Cancel
-            </Button>
-         </Box>
-      </StyledFormReview>
+      <AnimatePresence>
+         <StyledFormReview onSubmit={handleSubmit} ref={formRef}>
+            {error.trim().length > 0 && <p className="error">{error}</p>}
+            {success.trim().length > 0 && <p className="success">{success}</p>}
+            <InputRating rating={rating} setRating={setRating} label="Rating" />
+            <InputField
+               typeInput="input"
+               label="Title"
+               onChange={(e: any) => {
+                  setTitle(e.target.value);
+               }}
+               value={title}
+            />
+            <InputField
+               typeInput="textarea"
+               label="Description"
+               onChange={(e: any) => {
+                  setDesc(e.target.value);
+               }}
+               value={desc}
+            />
+            <Box className="btn-group">
+               <Button type="submit" disabled={loading}>
+                  {loading ? <Spinner /> : 'Submit'}
+               </Button>
+               <Button type="button" onClick={onClose}>
+                  Cancel
+               </Button>
+            </Box>
+         </StyledFormReview>
+      </AnimatePresence>
    );
 };
 

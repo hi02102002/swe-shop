@@ -8,7 +8,6 @@ export interface ProductItem {
    desc: string;
    id: string;
    productId: string;
-   isWishlist: boolean;
 }
 
 export interface CartItem {
@@ -23,16 +22,9 @@ export interface CartItem {
    productId: string;
 }
 
-export interface WishlistItem {
-   name: string;
-   price: number;
-   size: string[];
-   desc: string;
-   imgs: string[];
+export interface WishlistItem extends ProductItem {
    userId: string;
-   productId: string;
    wishListId: string;
-   id: string;
 }
 
 export interface ToastItem {

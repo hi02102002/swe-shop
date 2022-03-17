@@ -12,11 +12,11 @@ export const getAllProducts = createAsyncThunk<ProductItem[], any | undefined>(
    }
 );
 
-export const addWishList = createAsyncThunk<
+export const updateWishlist = createAsyncThunk<
    ProductItem,
    { product: ProductItem }
->('products/addWishList', async ({ product }) => {
-   const { data } = await sweApi.addWishList(product.id, product);
+>('products/updateWishlist', async ({ product }) => {
+   const { data } = await sweApi.updateWishlist(product.id, product);
    return data;
 });
 
@@ -77,9 +77,13 @@ const productsSlice = createSlice({
             state.error = action.error.message;
             state.loading = false;
          })
-         .addCase(addWishList.pending, (state) => {})
-         .addCase(addWishList.fulfilled, (state, action) => {
-            console.log(action.payload);
+         .addCase(updateWishlist.fulfilled, (state, action) => {
+            const indexExistFilter = state.products.findIndex(
+               (item) => item.id === action.payload.id
+            );
+            if (state.filter[indexExistFilter]) {
+               state.filter[indexExistFilter] = action.payload;
+            }
          });
    },
 });

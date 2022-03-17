@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledReviews = styled.div`
-   padding: 3rem 0;
    display: flex;
    flex-direction: column;
    row-gap: 2rem;

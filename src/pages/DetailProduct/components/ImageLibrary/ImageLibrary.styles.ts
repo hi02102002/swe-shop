@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const StyledImageLibrary = styled.div`
    flex-shrink: 0;
 
+   @media screen and (max-width: 767.98px) {
+      width: 80% !important;
+   }
+
    .current-img {
       border: 1px solid var(--swe-grey);
       position: relative;

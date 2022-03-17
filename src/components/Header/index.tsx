@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { IMGS } from 'images';
 import _ from 'lodash';
 import React, { useMemo, useState } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { IoCloseOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { v4 } from 'uuid';
 import { HeaderContainer, StyledHeader } from './styles';
@@ -16,6 +18,7 @@ import { HeaderContainer, StyledHeader } from './styles';
 const Header = () => {
    const { accessToken } = useAppSelector(authSelector);
    const [showCart, setShowCart] = useState<boolean>(false);
+   const [showMenu, setShowMenu] = useState('');
    const { carts } = useAppSelector(cartsSelector);
    const dispatch = useAppDispatch();
 
@@ -33,29 +36,10 @@ const Header = () => {
                <Link to="/" className="logo">
                   <img src={IMGS.logo} alt="" />
                </Link>
-               <Box>
+               <Box className={showMenu}>
                   <Link to={'/my-account'}>My account</Link>
+                  <Link to={'/products'}>Products</Link>
                   <Link to={'/wishlist'}>Wishlist</Link>
-                  <div>Search</div>
-                  <Box>
-                     <div
-                        onClick={() => {
-                           setShowCart(true);
-                        }}
-                     >
-                        Cart
-                     </div>
-                     <span className="total-amount-cart">
-                        {totalAmountCart}
-                     </span>
-                     {showCart && (
-                        <Cart
-                           onClose={() => {
-                              setShowCart(false);
-                           }}
-                        />
-                     )}
-                  </Box>
                   {accessToken ? (
                      <div
                         onClick={async () => {
@@ -75,7 +59,36 @@ const Header = () => {
                   ) : (
                      <Link to={'/auth'}>Login - Register</Link>
                   )}
+                  <IoCloseOutline
+                     className="close"
+                     onClick={() => {
+                        setShowMenu('');
+                     }}
+                  />
                </Box>
+               <div className="cart">
+                  <div
+                     onClick={() => {
+                        setShowCart(true);
+                     }}
+                  >
+                     Cart
+                  </div>
+                  <span className="total-amount-cart">{totalAmountCart}</span>
+                  {showCart && (
+                     <Cart
+                        onClose={() => {
+                           setShowCart(false);
+                        }}
+                     />
+                  )}
+               </div>
+               <AiOutlineMenu
+                  className="menu"
+                  onClick={() => {
+                     setShowMenu('active');
+                  }}
+               />
             </HeaderContainer>
          </div>
       </StyledHeader>

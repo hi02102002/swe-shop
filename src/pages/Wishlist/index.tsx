@@ -1,31 +1,27 @@
 import Hero from 'components/Hero';
 import Layout from 'components/Layout';
 import ListProducts from 'components/ListProducts';
-import { authSelector } from 'features/auth';
-import { getAllProducts, productsSelector } from 'features/productsSlice';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import React, { useEffect } from 'react';
+import Loader from 'components/Loader';
+import { wishlistSelector } from 'features/wishlist';
+import { useAppSelector } from 'hooks';
+import React from 'react';
 import { StyledWishlist } from './Wishlist.styles';
 
 const Wishlist = () => {
-   const { currentUser } = useAppSelector(authSelector);
-   const { products } = useAppSelector(productsSelector);
-   const dispatch = useAppDispatch();
+   const { wishlist, loading } = useAppSelector(wishlistSelector);
 
-   useEffect(() => {
-      const params = {
-         isWishlist: true,
-         userId: currentUser?.uid,
-      };
-      dispatch(getAllProducts(params));
-   }, [dispatch, currentUser]);
-
-   return (
+   return loading ? (
+      <Loader />
+   ) : (
       <Layout>
          <Hero path="Wishlist" content="Wishlist" />
          <StyledWishlist>
             <div className="container">
-               <ListProducts products={products} type="wishlist" />
+               {wishlist.length > 0 ? (
+                  <ListProducts products={wishlist} type="wishlist" />
+               ) : (
+                  <h5>There are no products in your wishlist!</h5>
+               )}
             </div>
          </StyledWishlist>
       </Layout>

@@ -7,8 +7,6 @@ const RequireAuth: React.FC = ({ children }) => {
    const { currentUser } = useAppSelector(authSelector);
    const location = useLocation();
 
-   console.log(currentUser);
-
    if (currentUser === null) {
       return <Navigate to="/auth" state={{ from: location }} replace />;
    }

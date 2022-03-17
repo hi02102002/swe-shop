@@ -32,7 +32,26 @@ const SimilarProduct: React.FC<{
    return products.length > 0 ? (
       <StyledSimilarProduct>
          <h5>Related Products</h5>
-         <Swiper slidesPerView={5}>
+         <Swiper
+            slidesPerView={5}
+            spaceBetween={15}
+            breakpoints={{
+               320: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+               },
+               // when window width is >= 480px
+               480: {
+                  slidesPerView: 3,
+                  spaceBetween: 15,
+               },
+               // when window width is >= 640px
+               768: {
+                  slidesPerView: 5,
+                  spaceBetween: 15,
+               },
+            }}
+         >
             {products.map((product) => (
                <SwiperSlide key={product.productId}>
                   <Product product={product} type="product" />

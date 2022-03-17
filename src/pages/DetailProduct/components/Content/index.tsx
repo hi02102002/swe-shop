@@ -7,15 +7,16 @@ import { authSelector } from 'features/auth/authSlice';
 import { cartAction } from 'features/cart';
 import { cartsSelector } from 'features/cart/cartSlice';
 import { addToastItem } from 'features/toastSlide';
+import { wishlistAction, wishlistSelector } from 'features/wishlist';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProductItem } from 'shared/types';
+import { ProductItem, WishlistItem } from 'shared/types';
 import { v4 } from 'uuid';
 import { StyledContent } from './Content.styles';
 
 const Content: React.FC<{
-   product: ProductItem | null;
+   product: ProductItem | null | WishlistItem;
 }> = ({ product }) => {
    const [chooseSize, setChooseSize] = useState('');
    const [amount, setAmount] = useState<number>(1);
@@ -23,6 +24,7 @@ const Content: React.FC<{
    const navigate = useNavigate();
    const { currentUser, accessToken } = useAppSelector(authSelector);
    const { add } = useAppSelector(cartsSelector);
+   const { wishlist } = useAppSelector(wishlistSelector);
 
    const handleAddToCart = async () => {
       if (!accessToken) {
@@ -58,6 +60,48 @@ const Content: React.FC<{
       );
    };
 
+   const handleAddWishlist = () => {
+      if (product) {
+         const wishlistExist = wishlist.find(
+            (item) => item.productId === product.id
+         );
+
+         if (wishlistExist) {
+            dispatch(
+               addToastItem({
+                  id: v4(),
+                  content: 'It already have in your wishlist!',
+                  type: 'ERROR',
+               })
+            );
+            return;
+         }
+
+         dispatch(
+            wishlistAction.addWishlist({
+               color: product.color,
+               desc: product.desc,
+               id: v4(),
+               imgs: product.imgs,
+               name: product.name,
+               price: product.price,
+               productId: product.id,
+               size: product.size,
+               types: product.types,
+               userId: currentUser?.uid as string,
+               wishListId: v4(),
+            })
+         );
+         dispatch(
+            addToastItem({
+               id: v4(),
+               content: 'Add to wishlist successful',
+               type: 'SUCCESS',
+            })
+         );
+      }
+   };
+
    useEffect(() => {
       setChooseSize(product?.size[0] as string);
    }, [product]);
@@ -87,7 +131,7 @@ const Content: React.FC<{
             <Button onClick={handleAddToCart} disabled={add.loading}>
                {add.loading ? <Spinner /> : 'Add to cart'}
             </Button>
-            <Button>Add to wishlist</Button>
+            <Button onClick={handleAddWishlist}>Add to wishlist</Button>
          </Box>
       </StyledContent>
    );

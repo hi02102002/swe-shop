@@ -15,21 +15,21 @@ export const sweApi = {
       return request.get<ProductItem>(`products/${id}`);
    },
 
-   addWishList: (id: string, product: ProductItem) => {
-      return request.put<ProductItem>(`/products/${id}`, {
+   updateWishlist: (id: string, product: ProductItem) => {
+      return request.put<ProductItem>(`products/${id}`, {
          ...product,
       });
    },
 
    getAllCarts: (userId: string) => {
-      return request.get<CartItem[]>('carts', {
+      return request.get<CartItem[]>(`carts`, {
          params: {
             userId,
          },
       });
    },
    addToCart: (data: CartItem) => {
-      return request.post<CartItem>('carts', {
+      return request.post<CartItem>(`carts`, {
          ...data,
       });
    },
@@ -42,7 +42,20 @@ export const sweApi = {
       return request.delete(`carts/${id}`);
    },
    getAllWishList: (userId: string) => {
-      return request.get<WishlistItem[]>('wishlist');
+      return request.get<WishlistItem[]>('wishlist', {
+         params: {
+            userId,
+         },
+      });
+   },
+
+   addWishlist: (wishlistItem: WishlistItem) => {
+      return request.post<WishlistItem>('wishlist', {
+         ...wishlistItem,
+      });
+   },
+   removeWishlist: (wishlistId: string) => {
+      return request.delete<WishlistItem>(`wishlist/${wishlistId}`);
    },
    getAllReviews: (productId: string, page?: number, limit?: number) => {
       return request.get<ReviewItem[]>('comments', {
