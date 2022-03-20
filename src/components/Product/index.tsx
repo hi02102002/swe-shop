@@ -51,6 +51,17 @@ const Product: React.FC<Props> = ({ product, type }) => {
                         (item) => item.productId === product.id
                      );
 
+                     if (!currentUser) {
+                        dispatch(
+                           addToastItem({
+                              id: v4(),
+                              content: 'You must login to add wishlist',
+                              type: 'ERROR',
+                           })
+                        );
+                        return;
+                     }
+
                      if (wishlistExist) {
                         dispatch(
                            addToastItem({

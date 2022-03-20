@@ -62,6 +62,48 @@ const productsSlice = createSlice({
             state.filter = state.products;
          }
       },
+      filterSidebar: (state, action) => {
+         if (
+            action.payload.types.length === 0 &&
+            action.payload.size.length === 0 &&
+            action.payload.color.length === 0
+         ) {
+            state.filter = state.products;
+         }
+         // if (action.payload.size.length > 0) {
+         //    state.filter = [...state.products].filter((product) => {
+         //       const check = product.size.find((item) =>
+         //          action.payload.size.includes(item)
+         //       );
+         //       return check !== undefined;
+         //    });
+         // }
+         // if (action.payload.types.length > 0) {
+         //    state.filter = [...state.products].filter((product) => {
+         //       const check = product.types.find((item) =>
+         //          action.payload.types.includes(item)
+         //       );
+         //       return check !== undefined;
+         //    });
+         // }
+
+         // if (action.payload.color.length > 0) {
+         //    state.filter = [...state.products].filter((product) => {
+         //       return action.payload.color.includes(product.color);
+         //    });
+         // }
+         // state.filter = [...state.products].filter((product) => {
+         //    const checkSize = product.size.find((item) =>
+         //       action.payload.size.includes(item)
+         //    );
+         //    const checkTypes = product.types.find((item) =>
+         //       action.payload.types.includes(item)
+         //    );
+         //    const checkColor = action.payload.color.includes(product.color);
+
+         //    return checkSize || checkColor || checkTypes;
+         // });
+      },
    },
    extraReducers: (builder) => {
       builder
@@ -88,6 +130,7 @@ const productsSlice = createSlice({
    },
 });
 
-export const { unmountProducts, filterHeader } = productsSlice.actions;
+export const { unmountProducts, filterHeader, filterSidebar } =
+   productsSlice.actions;
 export const productsSelector = (state: RootState) => state.products;
 export default productsSlice.reducer;

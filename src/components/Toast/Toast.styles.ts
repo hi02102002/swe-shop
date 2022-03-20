@@ -53,4 +53,9 @@ export const ToastItem = styled.div<{
          height: 2.4rem;
       }
    }
+
+   @media screen and (max-width: 374.98px) {
+      min-width: 25rem;
+      max-width: 25rem;
+   }
 `;

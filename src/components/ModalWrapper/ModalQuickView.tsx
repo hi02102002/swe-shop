@@ -113,7 +113,7 @@ const ModalQuickView: React.FC<Props> = ({ onClose, product }) => {
                      </Button>
                      <Button
                         onClick={() => {
-                           navigate(`${product.id}`);
+                           navigate(`/products/${product.id}`);
                         }}
                      >
                         View full info

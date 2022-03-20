@@ -16,6 +16,7 @@ export const StyledCheckbox = styled.div<{
    input {
       width: 1.6rem;
       height: 1.6rem;
+      cursor: pointer;
    }
 
    label {

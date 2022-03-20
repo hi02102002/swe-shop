@@ -2,7 +2,7 @@ import { sweApi } from 'api/sweApi';
 import Button from 'components/Button';
 import { authSelector } from 'features/auth';
 import { addToastItem } from 'features/toastSlide';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useIsMounted } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { ReviewItem } from 'shared/types';
@@ -17,18 +17,21 @@ const Reviews: React.FC<{
    const [showForm, setShowForm] = useState<boolean>(false);
    const { currentUser } = useAppSelector(authSelector);
    const dispatch = useAppDispatch();
+   const isMounted = useIsMounted();
 
    useEffect(() => {
       const handleGetReviews = async () => {
          if (productId) {
             const { data } = await sweApi.getAllReviews(productId, 1, 10);
-            setReviews(
-               data.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-            );
+            if (isMounted()) {
+               setReviews(
+                  data.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+               );
+            }
          }
       };
       handleGetReviews();
-   }, [productId]);
+   }, [productId, isMounted]);
 
    useEffect(() => {
       setShowForm(false);

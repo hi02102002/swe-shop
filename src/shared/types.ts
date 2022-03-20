@@ -43,3 +43,11 @@ export interface ReviewItem {
    id: string;
    title: string;
 }
+
+export interface FilterItem {
+   title: string;
+   filters: {
+      name: string;
+      value: string;
+   }[];
+}

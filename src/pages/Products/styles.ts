@@ -1,12 +1,19 @@
 import styled from 'styled-components';
 
 export const StyledProducts = styled.div`
-   overflow: hidden;
    padding: 3rem 0;
 
-   .container {
+   & > .container {
       display: flex;
-      flex-direction: column;
-      row-gap: 3rem;
+      column-gap: 1.5rem;
+
+      & > .box {
+         flex: 1;
+      }
+
+      & > .box > h6 {
+         text-align: center;
+         padding: 3rem 0;
+      }
    }
 `;

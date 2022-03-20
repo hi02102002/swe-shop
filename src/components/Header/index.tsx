@@ -5,7 +5,7 @@ import { authSelector } from 'features/auth/authSlice';
 import { cartAction } from 'features/cart';
 import { cartsSelector } from 'features/cart/cartSlice';
 import { addToastItem } from 'features/toastSlide';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useIsMounted } from 'hooks';
 import { IMGS } from 'images';
 import _ from 'lodash';
 import React, { useMemo, useState } from 'react';
@@ -21,6 +21,7 @@ const Header = () => {
    const [showMenu, setShowMenu] = useState('');
    const { carts } = useAppSelector(cartsSelector);
    const dispatch = useAppDispatch();
+   const isMounted = useIsMounted();
 
    const totalAmountCart = useMemo(() => {
       return carts.reduce(
@@ -69,7 +70,9 @@ const Header = () => {
                <div className="cart">
                   <div
                      onClick={() => {
-                        setShowCart(true);
+                        if (isMounted()) {
+                           setShowCart(true);
+                        }
                      }}
                   >
                      Cart
@@ -78,7 +81,9 @@ const Header = () => {
                   {showCart && (
                      <Cart
                         onClose={() => {
-                           setShowCart(false);
+                           if (isMounted()) {
+                              setShowCart(false);
+                           }
                         }}
                      />
                   )}

@@ -4,11 +4,15 @@ import ListProducts from 'components/ListProducts';
 import Loader from 'components/Loader';
 import { wishlistSelector } from 'features/wishlist';
 import { useAppSelector } from 'hooks';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyledWishlist } from './Wishlist.styles';
 
 const Wishlist = () => {
    const { wishlist, loading } = useAppSelector(wishlistSelector);
+
+   useEffect(() => {
+      document.title = 'SWE - WISHLIST';
+   }, []);
 
    return loading ? (
       <Loader />

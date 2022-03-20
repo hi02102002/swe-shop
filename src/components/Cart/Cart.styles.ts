@@ -18,6 +18,15 @@ export const StyledCart = styled(ClickAwayListener)`
    .alter {
       text-align: center;
    }
+
+   @media screen and (max-width: 767.98px) {
+      right: -45px;
+      width: 32rem;
+   }
+
+   @media screen and (max-width: 374.98px) {
+      width: 30rem;
+   }
 `;
 
 export const CartList = styled.ul`

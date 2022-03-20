@@ -8,11 +8,12 @@ const Checkbox: React.FC<{
    checked?: boolean;
    reverse?: boolean;
    name?: string;
-}> = ({ value, onChange, label, checked, reverse, name }) => {
+   type?: 'checkbox' | 'radio';
+}> = ({ value, onChange, label, checked, reverse, name, type }) => {
    return (
       <StyledCheckbox reverse={reverse}>
          <input
-            type="checkbox"
+            type={type}
             id={value}
             value={value}
             onChange={onChange}

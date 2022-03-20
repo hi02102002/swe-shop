@@ -7,6 +7,10 @@ export const StyledImageLibrary = styled.div`
       width: 80% !important;
    }
 
+   @media screen and (max-width: 639.98px) {
+      width: 100% !important;
+   }
+
    .current-img {
       border: 1px solid var(--swe-grey);
       position: relative;

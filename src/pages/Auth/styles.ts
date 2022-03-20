@@ -7,9 +7,17 @@ export const StyledAuth = styled.section`
 export const StyledWrap = styled.div`
    .box {
       display: flex;
+      @media screen and (max-width: 767.98px) {
+         flex-direction: column;
+         row-gap: 4rem;
+      }
 
       & > *:not(:last-child) {
          border-right: 1px solid var(--swe-grey);
+
+         @media screen and (max-width: 767.98px) {
+            border: 0;
+         }
       }
    }
 
@@ -20,6 +28,23 @@ export const StyledWrap = styled.div`
       flex-direction: column;
       row-gap: 2.4rem;
       padding: 8rem;
+
+      @media screen and (max-width: 1023.98px) {
+         padding: 4rem;
+      }
+
+      @media screen and (max-width: 767.98px) {
+         width: 100%;
+         padding: 0;
+
+         h5 {
+            text-align: center;
+         }
+      }
+
+      @media screen and (max-width: 374.98px) {
+         padding: 0;
+      }
    }
 `;
 
