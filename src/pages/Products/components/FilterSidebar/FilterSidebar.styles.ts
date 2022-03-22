@@ -18,4 +18,15 @@ export const StyledFilterSidebar = styled.aside`
    ul {
       row-gap: 0.5rem;
    }
+
+   @media screen and (max-width: 767.98px) {
+      width: 100%;
+      & > .box {
+         flex-direction: row;
+         flex-wrap: wrap;
+         justify-content: space-between;
+         max-width: 50rem;
+         margin: 0 auto;
+      }
+   }
 `;

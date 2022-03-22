@@ -30,6 +30,11 @@ export const StyledHeaderTable = styled.div`
    display: flex;
    padding: 1.5rem 0;
    border-bottom: 1px solid var(--swe-grey-1);
+   column-gap: 1.2rem;
+
+   @media screen and (max-width: 767.98px) {
+      display: none;
+   }
 `;
 export const StyledTable = styled.div`
    display: flex;
@@ -41,11 +46,17 @@ export const StyledListCart = styled.ul`
    display: flex;
    flex-direction: column;
    row-gap: 2.5rem;
+
+   @media screen and (max-width: 767.98px) {
+      row-gap: unset;
+   }
 `;
 
 export const StyledCart = styled.div`
    display: flex;
    align-items: center;
+   width: 100%;
+   column-gap: 1.2rem;
 
    .img-wrap {
       position: relative;
@@ -63,12 +74,53 @@ export const StyledCart = styled.div`
          height: 100%;
          object-fit: cover;
       }
+
+      @media screen and (max-width: 767.98px) {
+         padding: 20%;
+      }
    }
 
    .product {
       display: flex;
       align-items: center;
       column-gap: 1.2rem;
+
+      .content {
+         display: flex;
+         align-items: center;
+         column-gap: 1.2rem;
+         width: 100%;
+      }
+   }
+
+   .heading {
+      display: none;
+   }
+
+   @media screen and (max-width: 767.98px) {
+      flex-direction: column;
+      align-items: unset;
+      row-gap: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--swe-grey-6);
+
+      .product,
+      .price,
+      .total,
+      .quantity {
+         width: 100%;
+         display: flex;
+         column-gap: 1.2rem;
+         padding: 1rem;
+      }
+      .heading {
+         display: block;
+         width: 30%;
+      }
+
+      .content {
+         width: 100%;
+      }
    }
 `;
 

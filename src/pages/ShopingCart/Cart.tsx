@@ -32,34 +32,46 @@ const Cart: React.FC<{
    return (
       <StyledCart>
          <div className="product">
-            <div className="img-wrap">
-               <div className="inner">
-                  <img src={cart.img} alt={cart.name} />
+            <div className="heading">Product</div>
+            <div className="content">
+               <div className="img-wrap">
+                  <div className="inner">
+                     <img src={cart.img} alt={cart.name} />
+                  </div>
                </div>
+               <h6>
+                  {cart.name} {cart.size}
+               </h6>
             </div>
-            <h6>
-               {cart.name} {cart.size}
-            </h6>
          </div>
          <div className="price ">
-            <span>${cart.price}.00</span>
+            <div className="heading">Price</div>
+            <div className="content">
+               <span>${cart.price}.00</span>
+            </div>
          </div>
          <div className="quantity">
-            <InputAmount
-               amount={amount}
-               setAmount={setAmount}
-               onRemove={() => {
-                  dispatch(
-                     cartAction.removeCartItem({
-                        productId: cart.productId,
-                        size: cart.size,
-                     })
-                  );
-               }}
-            />
+            <div className="heading">Quantity</div>
+            <div className="content">
+               <InputAmount
+                  amount={amount}
+                  setAmount={setAmount}
+                  onRemove={() => {
+                     dispatch(
+                        cartAction.removeCartItem({
+                           productId: cart.productId,
+                           size: cart.size,
+                        })
+                     );
+                  }}
+               />
+            </div>
          </div>
          <div className="total">
-            <span>${total}.00</span>
+            <div className="heading">Total</div>
+            <div className="content">
+               <span>${total}.00</span>
+            </div>
          </div>
       </StyledCart>
    );

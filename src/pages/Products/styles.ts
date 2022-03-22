@@ -15,5 +15,10 @@ export const StyledProducts = styled.div`
          text-align: center;
          padding: 3rem 0;
       }
+
+      @media screen and (max-width: 767.98px) {
+         flex-direction: column;
+         row-gap: 2.4rem;
+      }
    }
 `;
