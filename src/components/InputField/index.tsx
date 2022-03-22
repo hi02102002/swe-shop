@@ -14,6 +14,8 @@ interface Props {
    errorText?: string;
    isError?: boolean;
    typeInput?: 'textarea' | 'input';
+   disabled?: boolean;
+   className?: string;
 }
 
 const InputField: React.FC<Props> = ({
@@ -29,6 +31,8 @@ const InputField: React.FC<Props> = ({
    errorText,
    isError,
    typeInput,
+   disabled,
+   className,
 }) => {
    const [isFocus, setIsFocus] = useState<boolean>(false);
 
@@ -49,7 +53,11 @@ const InputField: React.FC<Props> = ({
       onBlur && onBlur(e);
    };
    return (
-      <StyledInputField isFocus={isFocus} isError={isError}>
+      <StyledInputField
+         isFocus={isFocus}
+         isError={isError}
+         className={className || ''}
+      >
          {label && <label>{label}</label>}
          {typeInput === 'input' && (
             <input
@@ -63,6 +71,7 @@ const InputField: React.FC<Props> = ({
                required={require}
                name={name}
                autoComplete={'off'}
+               disabled={disabled}
             />
          )}
          {typeInput === 'textarea' && (

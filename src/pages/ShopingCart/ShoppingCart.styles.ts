@@ -20,7 +20,11 @@ export const StyledShoppingCart = styled.div`
    }
 `;
 
-export const StyledContainer = styled.div``;
+export const StyledContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+   row-gap: 3rem;
+`;
 
 export const StyledHeaderTable = styled.div`
    display: flex;
@@ -83,5 +87,40 @@ export const NoCart = styled.div`
 
    button {
       padding: 0 1.5rem;
+   }
+`;
+
+export const OrderSummary = styled.div`
+   width: 100%;
+   max-width: 55rem;
+   margin: 0 auto;
+   padding: 2.4rem;
+   border-radius: 6px;
+   background-color: var(--swe-grey-1);
+
+   h5 {
+      margin-bottom: 2.4rem;
+   }
+
+   .box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+
+      &.total-price {
+         padding-top: 2.4rem;
+         border-top: 1px solid;
+         margin-bottom: 0;
+         span {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+         }
+      }
+   }
+
+   button {
+      width: 100%;
+      margin-top: 2.4rem;
    }
 `;

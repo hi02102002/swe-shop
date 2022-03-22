@@ -27,6 +27,7 @@ const Auth = React.lazy(() => import('pages/Auth')); // Lazy-loaded
 const DetailProduct = React.lazy(() => import('pages/DetailProduct')); // Lazy-loaded
 const ShoppingCart = React.lazy(() => import('pages/ShopingCart')); // Lazy-loaded
 const Wishlist = React.lazy(() => import('pages/Wishlist')); // Lazy-loaded
+const Checkout = React.lazy(() => import('pages/Checkout')); // Lazy-loaded
 
 const App = () => {
    const { currentUser } = useAppSelector(authSelector);
@@ -92,6 +93,16 @@ const App = () => {
                   <Suspense fallback={<Loader />}>
                      <RequireAuth>
                         <Wishlist />
+                     </RequireAuth>
+                  </Suspense>
+               }
+            />
+            <Route
+               path="/checkout"
+               element={
+                  <Suspense fallback={<Loader />}>
+                     <RequireAuth>
+                        <Checkout />
                      </RequireAuth>
                   </Suspense>
                }

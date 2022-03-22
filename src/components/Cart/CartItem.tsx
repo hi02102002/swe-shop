@@ -37,6 +37,10 @@ const CartItem: React.FC<Props> = ({ cart }) => {
       );
    }, [amount, dispatch, cart.productId, cart.size]);
 
+   useEffect(() => {
+      setAmount(cart.amount);
+   }, [cart.amount]);
+
    return (
       <StyledCartItem>
          <div className="img">

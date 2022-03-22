@@ -1,16 +1,18 @@
+import Box from 'components/Box';
 import Button from 'components/Button';
 import Hero from 'components/Hero';
 import Layout from 'components/Layout';
 import Loader from 'components/Loader';
 import { cartsSelector } from 'features/cart';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAppSelector } from 'hooks';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { v4 } from 'uuid';
+import Cart from './Cart';
 import {
    NoCart,
-   StyledCart,
+   OrderSummary,
    StyledContainer,
    StyledHeaderTable,
    StyledListCart,
@@ -21,6 +23,18 @@ import {
 const ShoppingCart = () => {
    const { carts, loading } = useAppSelector(cartsSelector);
    const navigate = useNavigate();
+
+   const totalCart = useMemo(() => {
+      return carts.reduce((prev, current) => prev + current.amount, 0);
+   }, [carts]);
+
+   const totalPrice = useMemo(() => {
+      return carts.reduce(
+         (prev, current) => prev + current.amount * current.price,
+         0
+      );
+   }, [carts]);
+
    return loading ? (
       <Loader />
    ) : (
@@ -39,37 +53,21 @@ const ShoppingCart = () => {
                         </StyledHeaderTable>
                         {carts.length > 0 && (
                            <StyledListCart>
-                              {carts.map((cart) => {
-                                 const total = cart.amount * cart.price;
-                                 return (
-                                    <li key={v4()}>
-                                       <StyledCart>
-                                          <div className="product">
-                                             <div className="img-wrap">
-                                                <div className="inner">
-                                                   <img
-                                                      src={cart.img}
-                                                      alt={cart.name}
-                                                   />
-                                                </div>
-                                             </div>
-                                             <h6>
-                                                {cart.name} {cart.size}
-                                             </h6>
-                                          </div>
-                                          <div className="price ">
-                                             <span>${cart.price}.00</span>
-                                          </div>
-                                          <div className="quantity">
-                                             {cart.amount}
-                                          </div>
-                                          <div className="total">
-                                             <span>${total}.00</span>
-                                          </div>
-                                       </StyledCart>
-                                    </li>
-                                 );
-                              })}
+                              <AnimatePresence>
+                                 {carts.map((cart) => {
+                                    return (
+                                       <motion.li
+                                          layout
+                                          key={cart.id}
+                                          initial={{ opacity: 0 }}
+                                          animate={{ opacity: 1 }}
+                                          exit={{ opacity: 0 }}
+                                       >
+                                          <Cart cart={cart} />
+                                       </motion.li>
+                                    );
+                                 })}
+                              </AnimatePresence>
                            </StyledListCart>
                         )}
                      </StyledTable>
@@ -85,6 +83,30 @@ const ShoppingCart = () => {
                            Return to shop
                         </Button>
                      </NoCart>
+                  )}
+                  {carts.length > 0 && (
+                     <OrderSummary>
+                        <h5>Order Summary</h5>
+                        <Box>
+                           <span>Total</span>
+                           <span>{totalCart} item(s)</span>
+                        </Box>
+                        <Box>
+                           <span>Total weight </span>
+                           <span>0.0 lb</span>
+                        </Box>
+                        <Box className="total-price">
+                           <span>Total price </span>
+                           <h6>${totalPrice}.00</h6>
+                        </Box>
+                        <Button
+                           onClick={() => {
+                              navigate('/checkout');
+                           }}
+                        >
+                           Go to checkout
+                        </Button>
+                     </OrderSummary>
                   )}
                </StyledContainer>
             </div>

@@ -21,12 +21,6 @@ const Home = () => {
                         <p>tất cả sản phẩm</p>
                      </Link>
                   </Box>
-                  <Box>
-                     <Link to="/colections">
-                        <img src={IMGS.homepageImgIndex2} alt="" />
-                        <p>knit colections</p>
-                     </Link>
-                  </Box>
                </Hero>
             </div>
          </StyledHome>

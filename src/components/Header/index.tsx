@@ -38,7 +38,7 @@ const Header = () => {
                   <img src={IMGS.logo} alt="" />
                </Link>
                <Box className={showMenu}>
-                  <Link to={'/my-account'}>My account</Link>
+                  <Link to={'/'}>Home</Link>
                   <Link to={'/products'}>Products</Link>
                   <Link to={'/wishlist'}>Wishlist</Link>
                   {accessToken ? (
