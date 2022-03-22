@@ -1,8 +1,8 @@
 import Box from 'components/Box';
 import Hero from 'components/Hero';
 import Layout from 'components/Layout';
-import { authSelector } from 'features/auth';
-import { useAppSelector } from 'hooks';
+import { authAction, authSelector } from 'features/auth';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
@@ -12,6 +12,7 @@ import { StyledAuth, StyledWrap } from './styles';
 const Auth = () => {
    const navigate = useNavigate();
    const { accessToken } = useAppSelector(authSelector);
+   const dispatch = useAppDispatch();
 
    useEffect(() => {
       document.title = 'Login - Register';
@@ -22,6 +23,12 @@ const Auth = () => {
          navigate(-1);
       }
    }, [accessToken, navigate]);
+
+   useEffect(() => {
+      return () => {
+         dispatch(authAction.unmountAuth());
+      };
+   }, [dispatch]);
 
    return (
       <Layout>

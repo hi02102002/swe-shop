@@ -49,7 +49,8 @@ export const HeaderContainer = styled(Box)`
          transform: translateX(110%);
          transition: transform 0.3s ease;
 
-         a {
+         a,
+         div {
             font-size: 2rem;
          }
 

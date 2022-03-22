@@ -87,6 +87,12 @@ const authSlice = createSlice({
          .addCase(authAction.handleLogout.rejected, (state) => {
             state.logout.error = 'Something went wrong!';
             state.logout.loading = false;
+         })
+         .addCase(authAction.unmountAuth, (state) => {
+            state.login.error = null;
+            state.login.loading = false;
+            state.register.error = null;
+            state.register.loading = false;
          });
    },
 });

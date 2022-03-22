@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { request } from 'api/axiosClient';
 import {
    createUserWithEmailAndPassword,
@@ -66,7 +66,7 @@ export const authAction = {
 
          callback && callback();
 
-         await request.post('user', {
+         await request.post('users', {
             createdAt: new Date().toISOString(),
             displayName: user.displayName,
             avatar: user.photoURL,
@@ -99,4 +99,5 @@ export const authAction = {
    >('auth/handleLogout', async (_) => {
       await signOut(firebaseAuth);
    }),
+   unmountAuth: createAction('auth/unmountAuth'),
 };
